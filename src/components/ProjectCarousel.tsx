@@ -1,0 +1,241 @@
+import { useState } from 'react';
+import { Github, ExternalLink, ChevronLeft, ChevronRight } from 'lucide-react';
+
+interface Project {
+  id: string;
+  title: string;
+  description: string;
+  short_description: string;
+  technologies: string[];
+  github_url?: string;
+  live_url?: string;
+  image_url?: string;
+  featured?: boolean;
+}
+
+interface ProjectCarouselProps {
+  projects: Project[];
+  featured?: boolean;
+}
+
+export function ProjectCarousel({ projects }: ProjectCarouselProps) {
+  const [expandedDescriptions, setExpandedDescriptions] = useState<Set<number>>(new Set());
+  const [expandedTags, setExpandedTags] = useState<Set<number>>(new Set());
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const toggleDescription = (projectIndex: number) => {
+    setExpandedDescriptions(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(projectIndex)) {
+        newSet.delete(projectIndex);
+      } else {
+        newSet.add(projectIndex);
+      }
+      return newSet;
+    });
+  };
+
+  const toggleTags = (projectIndex: number) => {
+    setExpandedTags(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(projectIndex)) {
+        newSet.delete(projectIndex);
+      } else {
+        newSet.add(projectIndex);
+      }
+      return newSet;
+    });
+  };
+
+  if (projects.length === 0) return null;
+
+  // Calculate average description length to determine which descriptions are significantly longer
+  const averageDescriptionLength = projects.reduce((sum, project) => sum + project.description.length, 0) / projects.length;
+  const shouldShowSeeMore = (description: string) => description.length > averageDescriptionLength * 1.8; // 80% longer than average - only for very long descriptions
+
+  // Calculate average number of technologies to determine when to show more tags
+  const averageTechnologiesCount = projects.reduce((sum, project) => sum + project.technologies.length, 0) / projects.length;
+  const shouldShowMoreTags = (technologies: string[]) => technologies.length > averageTechnologiesCount * 1.5; // 50% more than average
+
+  // Create carousel items - each slide shows 2 projects, advance by 2
+  const carouselItems = [];
+  for (let i = 0; i < projects.length; i += 2) {
+    const firstProject = projects[i];
+    const secondProject = projects[(i + 1) % projects.length];
+
+    carouselItems.push({
+      firstProject: firstProject,
+      secondProject: secondProject,
+      firstIndex: i,
+      secondIndex: (i + 1) % projects.length
+    });
+  }
+
+  const ProjectCard = ({ project, projectIndex, cardStyle }: { project: any, projectIndex: number, cardStyle: string }) => (
+    <div className={`grid xl:grid-cols-4 gap-0 flex flex-col justify-between ${cardStyle} rounded-xl overflow-hidden shadow-lg transition-all duration-300 ease-in-out transform hover:scale-[1.02]`}>
+      <div className="xl:col-span-3 p-6 lg:p-8 flex flex-col justify-between h-full">
+        <div className="space-y-3 flex-1">
+          <div>
+            <h3 className="text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white mb-3">
+              {project.title}
+            </h3>
+            <div className="relative">
+              <p className={`text-base text-gray-700 dark:text-gray-300 leading-relaxed ${expandedDescriptions.has(projectIndex) ? '' : 'line-clamp-5'}`}>
+                {project.description}
+              </p>
+              {shouldShowSeeMore(project.description) && (
+                <button
+                  onClick={() => toggleDescription(projectIndex)}
+                  className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium text-sm mt-2 transition-colors"
+                >
+                  {expandedDescriptions.has(projectIndex) ? 'See less' : 'See more'}
+                </button>
+              )}
+            </div>
+          </div>
+
+          {/* Technologies */}
+          <div className="flex flex-wrap gap-2">
+            {project.technologies.slice(0, expandedTags.has(projectIndex) ? project.technologies.length : 5).map((tech: string, index: number) => (
+              <span
+                key={index}
+                className="px-2 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-full text-xs font-medium"
+              >
+                {tech}
+              </span>
+            ))}
+            {shouldShowMoreTags(project.technologies) && !expandedTags.has(projectIndex) && (
+              <button
+                onClick={() => toggleTags(projectIndex)}
+                className="px-2 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-full text-xs font-medium hover:bg-blue-200 dark:hover:bg-blue-900/50 transition-colors"
+              >
+                +{project.technologies.length - 5} more
+              </button>
+            )}
+            {expandedTags.has(projectIndex) && shouldShowMoreTags(project.technologies) && (
+              <button
+                onClick={() => toggleTags(projectIndex)}
+                className="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 rounded-full text-xs font-medium hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+              >
+                Show less
+              </button>
+            )}
+          </div>
+        </div>
+
+        {/* Action Buttons */}
+        <div className="flex gap-3 pt-3 mt-auto">
+          {project.github_url && (
+            <a
+              href={project.github_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 px-4 py-2 bg-gray-900 dark:bg-gray-700 text-white rounded-lg hover:bg-gray-800 dark:hover:bg-gray-600 transition-colors font-semibold text-sm"
+            >
+              <Github className="w-4 h-4" />
+              Code
+            </a>
+          )}
+          {project.live_url && (
+            <a
+              href={project.live_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-semibold text-sm"
+            >
+              <ExternalLink className="w-4 h-4" />
+              Demo
+            </a>
+          )}
+        </div>
+      </div>
+
+      {/* Project Image */}
+      <div className="xl:col-span-1 relative overflow-hidden bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
+        <div className="w-full h-3/4 max-h-[200px] relative">
+          <img
+            src={project.image_url || 'https://images.pexels.com/photos/270348/pexels-photo-270348.jpeg?auto=compress&cs=tinysrgb&w=600'}
+            alt={project.title}
+            className="w-full h-full object-cover transition-all duration-500 ease-in-out hover:scale-105 rounded-lg"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-lg transition-all duration-300"></div>
+        </div>
+      </div>
+    </div>
+  );
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % carouselItems.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + carouselItems.length) % carouselItems.length);
+  };
+
+  const goToSlide = (index: number) => {
+    setCurrentSlide(index);
+  };
+
+  return (
+    <div className="relative w-full">
+      <div className="relative overflow-hidden rounded-2xl bg-white dark:bg-gray-800 shadow-2xl">
+        {/* Carousel Container */}
+        <div className="relative">
+          <div
+            className="flex transition-transform duration-500 ease-in-out"
+            style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+          >
+            {carouselItems.map((item, index) => (
+              <div key={index} className="w-full flex-shrink-0">
+                <div className="grid xl:grid-cols-2 gap-6 min-h-[350px] lg:min-h-[400px] p-6">
+                  <ProjectCard
+                    project={item.firstProject}
+                    projectIndex={item.firstIndex}
+                    cardStyle="bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20"
+                  />
+                  <ProjectCard
+                    project={item.secondProject}
+                    projectIndex={item.secondIndex}
+                    cardStyle="bg-gradient-to-br from-cyan-50 to-blue-50 dark:from-cyan-900/20 dark:to-blue-900/20"
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Navigation Controls */}
+        <button
+          onClick={prevSlide}
+          className="absolute left-4 top-1/2 -translate-y-1/2 p-2 bg-white dark:bg-gray-700 rounded-full shadow-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors z-10"
+          aria-label="Previous slide"
+        >
+          <ChevronLeft className="w-6 h-6 text-gray-700 dark:text-gray-300" />
+        </button>
+
+        <button
+          onClick={nextSlide}
+          className="absolute right-4 top-1/2 -translate-y-1/2 p-2 bg-white dark:bg-gray-700 rounded-full shadow-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors z-10"
+          aria-label="Next slide"
+        >
+          <ChevronRight className="w-6 h-6 text-gray-700 dark:text-gray-300" />
+        </button>
+
+        {/* Indicators */}
+        <div className="flex justify-center space-x-2 pb-4">
+          {carouselItems.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => goToSlide(index)}
+              className={`w-3 h-3 rounded-full transition-colors ${index === currentSlide
+                ? 'bg-blue-600 dark:bg-blue-400'
+                : 'bg-gray-300 dark:bg-gray-600 hover:bg-gray-400 dark:hover:bg-gray-500'
+                }`}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
