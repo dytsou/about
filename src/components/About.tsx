@@ -18,16 +18,11 @@ export function About() {
           <div className="space-y-6">
             <div className="relative">
               <div className="w-full aspect-square max-w-md mx-auto bg-gradient-to-br from-blue-100 to-cyan-100 dark:from-blue-900 dark:to-cyan-900 rounded-2xl overflow-hidden shadow-2xl">
-                {(() => {
-                  const photo = new URL('../assets/profile.jpeg', import.meta.url).href;
-                  return (
-                    <img
-                      src={photo}
-                      alt="Dong-You Tsou"
-                      className="w-full h-full object-cover"
-                    />
-                  );
-                })()}
+                <img
+                  src={import.meta.env.BASE_URL + 'profile.jpeg'}
+                  alt="Dong-You Tsou"
+                  className="w-full h-full object-cover"
+                />
               </div>
             </div>
           </div>
