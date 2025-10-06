@@ -26,7 +26,7 @@ export function Hero() {
               Full-Stack Developer
             </p>
             <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed">
-              A computer Science student at NYCU, passionate about building scalable systems,
+              A computer science student at NYCU, passionate about building scalable systems,
               leading developer communities, and creating innovative solutions
             </p>
           </div>

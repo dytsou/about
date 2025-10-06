@@ -1,5 +1,23 @@
 import { useState, useEffect } from 'react';
-import { Github, ExternalLink, ChevronLeft, ChevronRight } from 'lucide-react';
+import {
+  Github,
+  ExternalLink,
+  ChevronLeft,
+  ChevronRight,
+  Boxes,
+  Cpu,
+  Terminal,
+  Database,
+  Globe,
+  Bot,
+  Rocket,
+  Layers,
+  LayoutDashboard,
+  CalendarDays,
+  CircleDot,
+  Puzzle,
+  Disc
+} from 'lucide-react';
 
 interface Project {
   id: string;
@@ -70,36 +88,99 @@ export function ProjectCarousel({ projects }: ProjectCarouselProps) {
   const averageTechnologiesCount = projects.reduce((sum, project) => sum + project.technologies.length, 0) / projects.length;
   const shouldShowMoreTags = (technologies: string[]) => technologies.length > averageTechnologiesCount * 1.5; // 50% more than average
 
-  // Create carousel items - responsive: 1 project on mobile, 2 on desktop
+  // (Removed) Primary language badge helpers
+
+  // Pick icon and colors based on project technologies/title
+  const getProjectIconAndColors = (project: any) => {
+    const tech = (project.technologies || []).map((t: string) => t.toLowerCase());
+    const title = String(project.title || '').toLowerCase();
+
+    // Explicit title-based mappings
+    if (title.includes('core system')) {
+      return { Icon: LayoutDashboard, bgClass: 'from-slate-50 to-gray-100 dark:from-slate-800/40 dark:to-gray-800/40', iconClass: 'text-slate-700 dark:text-slate-300' };
+    }
+    if (title.includes('caiender') || title.includes('caiendar') || title.includes('calendar')) {
+      return { Icon: CalendarDays, bgClass: 'from-cyan-50 to-blue-50 dark:from-cyan-900/20 dark:to-blue-900/20', iconClass: 'text-cyan-600 dark:text-cyan-400' };
+    }
+    if (title.includes('ballquest')) {
+      return { Icon: CircleDot, bgClass: 'from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20', iconClass: 'text-orange-600 dark:text-orange-400' };
+    }
+    if (title.includes('dungeon')) {
+      return { Icon: Puzzle, bgClass: 'from-violet-50 to-purple-50 dark:from-violet-900/20 dark:to-purple-900/20', iconClass: 'text-violet-600 dark:text-violet-400' };
+    }
+    if (title.includes('reversi')) {
+      return { Icon: Disc, bgClass: 'from-zinc-50 to-slate-50 dark:from-zinc-800/40 dark:to-slate-800/40', iconClass: 'text-zinc-700 dark:text-zinc-300' };
+    }
+
+    if (tech.includes('go') || title.includes('backend')) {
+      return { Icon: Terminal, bgClass: 'from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20', iconClass: 'text-blue-600 dark:text-blue-400' };
+    }
+    if (tech.includes('docker')) {
+      return { Icon: Boxes, bgClass: 'from-cyan-50 to-blue-50 dark:from-cyan-900/20 dark:to-blue-900/20', iconClass: 'text-cyan-600 dark:text-cyan-400' };
+    }
+    if (tech.includes('postgresql') || tech.includes('database')) {
+      return { Icon: Database, bgClass: 'from-indigo-50 to-blue-50 dark:from-indigo-900/20 dark:to-blue-900/20', iconClass: 'text-indigo-600 dark:text-indigo-400' };
+    }
+    if (tech.includes('graphql')) {
+      return { Icon: Layers, bgClass: 'from-pink-50 to-purple-50 dark:from-pink-900/20 dark:to-purple-900/20', iconClass: 'text-pink-600 dark:text-pink-400' };
+    }
+    if (tech.includes('flutter') || tech.includes('dart')) {
+      return { Icon: Rocket, bgClass: 'from-sky-50 to-cyan-50 dark:from-sky-900/20 dark:to-cyan-900/20', iconClass: 'text-sky-600 dark:text-sky-400' };
+    }
+    if (tech.includes('c++') || tech.includes('c') || title.includes('game')) {
+      return { Icon: Cpu, bgClass: 'from-gray-50 to-slate-50 dark:from-gray-800/40 dark:to-slate-800/40', iconClass: 'text-gray-700 dark:text-gray-300' };
+    }
+    if (tech.includes('ai') || tech.includes('llm') || title.includes('ai')) {
+      return { Icon: Bot, bgClass: 'from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20', iconClass: 'text-emerald-600 dark:text-emerald-400' };
+    }
+
+    // Default web app
+    return { Icon: Globe, bgClass: 'from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20', iconClass: 'text-blue-600 dark:text-blue-400' };
+  };
+
+  // Create carousel items - responsive: 1 project on mobile, 3 on desktop
   const carouselItems = isMobile
     ? projects.map((project, index) => ({
       firstProject: project,
       secondProject: null,
       firstIndex: index,
-      secondIndex: null
+      secondIndex: null,
+      thirdProject: null,
+      thirdIndex: null
     }))
     : (() => {
       const items = [];
-      for (let i = 0; i < projects.length; i += 2) {
+      for (let i = 0; i < projects.length; i += 3) {
         const firstProject = projects[i];
         const secondProject = projects[(i + 1) % projects.length];
+        const thirdProject = projects[(i + 2) % projects.length];
         items.push({
           firstProject: firstProject,
           secondProject: secondProject,
           firstIndex: i,
-          secondIndex: (i + 1) % projects.length
+          secondIndex: (i + 1) % projects.length,
+          thirdProject: thirdProject,
+          thirdIndex: (i + 2) % projects.length
         });
       }
       return items;
     })();
 
   const ProjectCard = ({ project, projectIndex, cardStyle }: { project: any, projectIndex: number, cardStyle: string }) => (
-    <div className={`${isMobile ? 'w-full max-w-2xl' : 'grid xl:grid-cols-4 gap-0'} flex flex-col justify-between ${cardStyle} rounded-xl overflow-hidden shadow-lg transition-all duration-300 ease-in-out transform hover:scale-[1.02]`}>
-      <div className={`${isMobile ? 'w-full' : 'xl:col-span-3'} p-6 lg:p-8 flex flex-col justify-between h-full`}>
+    <div className={`${isMobile ? 'w-full max-w-2xl' : ''} flex flex-col justify-between ${cardStyle} rounded-xl overflow-hidden shadow-lg transition-all duration-300 ease-in-out transform hover:scale-[1.02]`}>
+      <div className={`w-full p-6 lg:p-8 flex flex-col justify-between h-full`}>
         <div className="space-y-3 flex-1">
           <div>
-            <h3 className="text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white mb-3">
-              {project.title}
+            <h3 className="text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white mb-1">
+              {(() => {
+                const { Icon, iconClass } = getProjectIconAndColors(project);
+                return (
+                  <span className="inline-flex items-center gap-3 flex-wrap">
+                    <Icon className={`w-6 h-6 ${iconClass}`} />
+                    <span>{project.title}</span>
+                  </span>
+                );
+              })()}
             </h3>
             <div className="relative">
               <p className={`text-base text-gray-700 dark:text-gray-300 leading-relaxed ${expandedDescriptions.has(projectIndex) ? '' : 'line-clamp-5'}`}>
@@ -171,18 +252,6 @@ export function ProjectCarousel({ projects }: ProjectCarouselProps) {
           )}
         </div>
       </div>
-
-      {/* Project Image */}
-      <div className={`${isMobile ? 'w-full h-48' : 'xl:col-span-1'} relative overflow-hidden bg-gray-200 dark:bg-gray-700 flex items-center justify-center`}>
-        <div className={`${isMobile ? 'w-full h-full' : 'w-full h-3/4 max-h-[200px]'} relative`}>
-          <img
-            src={project.image_url || 'https://images.pexels.com/photos/270348/pexels-photo-270348.jpeg?auto=compress&cs=tinysrgb&w=600'}
-            alt={project.title}
-            className="w-full h-full object-cover transition-all duration-500 ease-in-out hover:scale-105 rounded-lg"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-lg transition-all duration-300"></div>
-        </div>
-      </div>
     </div>
   );
 
@@ -209,7 +278,7 @@ export function ProjectCarousel({ projects }: ProjectCarouselProps) {
           >
             {carouselItems.map((item, index) => (
               <div key={index} className="w-full flex-shrink-0">
-                <div className={`${isMobile ? 'flex justify-center' : 'grid xl:grid-cols-2'} gap-6 min-h-[350px] lg:min-h-[400px] p-6`}>
+                <div className={`${isMobile ? 'flex justify-center' : 'grid xl:grid-cols-3'} gap-6 min-h-[350px] lg:min-h-[400px] p-6`}>
                   <ProjectCard
                     project={item.firstProject}
                     projectIndex={item.firstIndex}
@@ -220,6 +289,13 @@ export function ProjectCarousel({ projects }: ProjectCarouselProps) {
                       project={item.secondProject}
                       projectIndex={item.secondIndex}
                       cardStyle="bg-gradient-to-br from-cyan-50 to-blue-50 dark:from-cyan-900/20 dark:to-blue-900/20"
+                    />
+                  )}
+                  {!isMobile && item.thirdProject && (
+                    <ProjectCard
+                      project={item.thirdProject}
+                      projectIndex={item.thirdIndex}
+                      cardStyle="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20"
                     />
                   )}
                 </div>
