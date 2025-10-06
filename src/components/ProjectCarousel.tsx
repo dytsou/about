@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Github, ExternalLink, ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface Project {
@@ -22,6 +22,19 @@ export function ProjectCarousel({ projects }: ProjectCarouselProps) {
   const [expandedDescriptions, setExpandedDescriptions] = useState<Set<number>>(new Set());
   const [expandedTags, setExpandedTags] = useState<Set<number>>(new Set());
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Check screen size and update mobile state
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth < 1280);
+    };
+
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
+
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, []);
 
   const toggleDescription = (projectIndex: number) => {
     setExpandedDescriptions(prev => {
@@ -57,23 +70,32 @@ export function ProjectCarousel({ projects }: ProjectCarouselProps) {
   const averageTechnologiesCount = projects.reduce((sum, project) => sum + project.technologies.length, 0) / projects.length;
   const shouldShowMoreTags = (technologies: string[]) => technologies.length > averageTechnologiesCount * 1.5; // 50% more than average
 
-  // Create carousel items - each slide shows 2 projects, advance by 2
-  const carouselItems = [];
-  for (let i = 0; i < projects.length; i += 2) {
-    const firstProject = projects[i];
-    const secondProject = projects[(i + 1) % projects.length];
-
-    carouselItems.push({
-      firstProject: firstProject,
-      secondProject: secondProject,
-      firstIndex: i,
-      secondIndex: (i + 1) % projects.length
-    });
-  }
+  // Create carousel items - responsive: 1 project on mobile, 2 on desktop
+  const carouselItems = isMobile
+    ? projects.map((project, index) => ({
+      firstProject: project,
+      secondProject: null,
+      firstIndex: index,
+      secondIndex: null
+    }))
+    : (() => {
+      const items = [];
+      for (let i = 0; i < projects.length; i += 2) {
+        const firstProject = projects[i];
+        const secondProject = projects[(i + 1) % projects.length];
+        items.push({
+          firstProject: firstProject,
+          secondProject: secondProject,
+          firstIndex: i,
+          secondIndex: (i + 1) % projects.length
+        });
+      }
+      return items;
+    })();
 
   const ProjectCard = ({ project, projectIndex, cardStyle }: { project: any, projectIndex: number, cardStyle: string }) => (
-    <div className={`grid xl:grid-cols-4 gap-0 flex flex-col justify-between ${cardStyle} rounded-xl overflow-hidden shadow-lg transition-all duration-300 ease-in-out transform hover:scale-[1.02]`}>
-      <div className="xl:col-span-3 p-6 lg:p-8 flex flex-col justify-between h-full">
+    <div className={`${isMobile ? 'w-full max-w-2xl' : 'grid xl:grid-cols-4 gap-0'} flex flex-col justify-between ${cardStyle} rounded-xl overflow-hidden shadow-lg transition-all duration-300 ease-in-out transform hover:scale-[1.02]`}>
+      <div className={`${isMobile ? 'w-full' : 'xl:col-span-3'} p-6 lg:p-8 flex flex-col justify-between h-full`}>
         <div className="space-y-3 flex-1">
           <div>
             <h3 className="text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white mb-3">
@@ -151,8 +173,8 @@ export function ProjectCarousel({ projects }: ProjectCarouselProps) {
       </div>
 
       {/* Project Image */}
-      <div className="xl:col-span-1 relative overflow-hidden bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
-        <div className="w-full h-3/4 max-h-[200px] relative">
+      <div className={`${isMobile ? 'w-full h-48' : 'xl:col-span-1'} relative overflow-hidden bg-gray-200 dark:bg-gray-700 flex items-center justify-center`}>
+        <div className={`${isMobile ? 'w-full h-full' : 'w-full h-3/4 max-h-[200px]'} relative`}>
           <img
             src={project.image_url || 'https://images.pexels.com/photos/270348/pexels-photo-270348.jpeg?auto=compress&cs=tinysrgb&w=600'}
             alt={project.title}
@@ -187,17 +209,19 @@ export function ProjectCarousel({ projects }: ProjectCarouselProps) {
           >
             {carouselItems.map((item, index) => (
               <div key={index} className="w-full flex-shrink-0">
-                <div className="grid xl:grid-cols-2 gap-6 min-h-[350px] lg:min-h-[400px] p-6">
+                <div className={`${isMobile ? 'flex justify-center' : 'grid xl:grid-cols-2'} gap-6 min-h-[350px] lg:min-h-[400px] p-6`}>
                   <ProjectCard
                     project={item.firstProject}
                     projectIndex={item.firstIndex}
                     cardStyle="bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20"
                   />
-                  <ProjectCard
-                    project={item.secondProject}
-                    projectIndex={item.secondIndex}
-                    cardStyle="bg-gradient-to-br from-cyan-50 to-blue-50 dark:from-cyan-900/20 dark:to-blue-900/20"
-                  />
+                  {!isMobile && item.secondProject && (
+                    <ProjectCard
+                      project={item.secondProject}
+                      projectIndex={item.secondIndex}
+                      cardStyle="bg-gradient-to-br from-cyan-50 to-blue-50 dark:from-cyan-900/20 dark:to-blue-900/20"
+                    />
+                  )}
                 </div>
               </div>
             ))}
