@@ -35,6 +35,14 @@ jobs:
           branch: main
           folder: dist
           clean: true
+          clean-exclude: |
+            404.html
+            error.html
+            no-ref-page.html
+            README.md
+            redirect.js
+            safe-browsing-warning.html
+            public/**
           single-commit: true
 
 
