@@ -8,8 +8,7 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -b main -d dist -r https://github.com/dytsou/dytsou.github.io.git",
+    "deploy": "gh-pages -d dist",
     "typecheck": "tsc --noEmit -p tsconfig.app.json"
   },
   "dependencies": {
