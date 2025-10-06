@@ -19,9 +19,9 @@ export function About() {
             <div className="relative">
               <div className="w-full aspect-square max-w-md mx-auto bg-gradient-to-br from-blue-100 to-cyan-100 dark:from-blue-900 dark:to-cyan-900 rounded-2xl overflow-hidden shadow-2xl">
                 <img
-                  src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=600"
+                  src="public/profile.jpeg"
                   alt="Dong-You Tsou"
-                  className="w-full h-full object-cover mix-blend-overlay opacity-80"
+                  className="w-full h-full object-cover"
                 />
               </div>
             </div>
