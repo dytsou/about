@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Github, ExternalLink } from 'lucide-react';
 import { TechTag } from '../ui/TechTag';
 import './ProjectCard.css';
@@ -32,6 +32,8 @@ export function ProjectCard({
 }: ProjectCardProps) {
   const [expandedDescriptions, setExpandedDescriptions] = useState<Set<number>>(new Set());
   const [expandedTags, setExpandedTags] = useState<Set<number>>(new Set());
+  const [shouldShowToggle, setShouldShowToggle] = useState<boolean>(false);
+  const descriptionRef = useRef<HTMLParagraphElement | null>(null);
 
   const toggleDescription = (projectIndex: number) => {
     setExpandedDescriptions(prev => {
@@ -59,6 +61,31 @@ export function ProjectCard({
 
   const { Icon, iconClass } = getProjectIconAndColors(project);
 
+  useEffect(() => {
+    const measureOverflowCollapsed = () => {
+      const element = descriptionRef.current;
+      if (!element) return;
+
+      const isExpanded = expandedDescriptions.has(projectIndex);
+
+      if (isExpanded) {
+        element.classList.add('project-description-collapsed');
+        const hasOverflow = element.scrollHeight > element.clientHeight;
+        element.classList.remove('project-description-collapsed');
+        setShouldShowToggle(hasOverflow);
+      } else {
+        const hasOverflow = element.scrollHeight > element.clientHeight;
+        setShouldShowToggle(hasOverflow);
+      }
+    };
+
+    measureOverflowCollapsed();
+    window.addEventListener('resize', measureOverflowCollapsed);
+    return () => {
+      window.removeEventListener('resize', measureOverflowCollapsed);
+    };
+  }, [project.description, projectIndex, expandedDescriptions]);
+
   return (
     <div className={`project-card ${isMobile ? 'project-card-mobile' : ''} ${cardStyle}`}>
       <div className="project-card-content">
@@ -71,15 +98,17 @@ export function ProjectCard({
               </span>
             </h3>
             <div className="project-description-container">
-              <p className={`project-description ${expandedDescriptions.has(projectIndex) ? '' : 'project-description-collapsed'}`}>
+              <p ref={descriptionRef} className={`project-description ${expandedDescriptions.has(projectIndex) ? '' : 'project-description-collapsed'}`}>
                 {project.description}
               </p>
-              <button
-                onClick={() => toggleDescription(projectIndex)}
-                className="project-description-toggle"
-              >
-                {expandedDescriptions.has(projectIndex) ? 'See less' : 'See more'}
-              </button>
+              {shouldShowToggle && (
+                <button
+                  onClick={() => toggleDescription(projectIndex)}
+                  className="project-description-toggle"
+                >
+                  {expandedDescriptions.has(projectIndex) ? 'See less' : 'See more'}
+                </button>
+              )}
             </div>
           </div>
 
