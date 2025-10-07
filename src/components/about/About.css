@@ -6,7 +6,7 @@
 }
 
 .about-prose {
-  @apply prose prose-lg dark:prose-invert max-w-none;
+  @apply max-w-none;
 }
 
 .about-text {

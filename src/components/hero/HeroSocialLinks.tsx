@@ -1,6 +1,6 @@
 import { Github, Linkedin, Mail } from 'lucide-react';
 import { IconButton } from '../ui/IconButton';
-import '../Hero.css';
+import './Hero.css';
 
 export function HeroSocialLinks() {
   return (

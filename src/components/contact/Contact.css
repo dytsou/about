@@ -23,7 +23,7 @@
 
 /* Contact Card */
 .contact-card {
-  @apply flex flex-col items-center gap-4 p-6 rounded-xl transition-all hover:shadow-lg transform hover:-translate-y-1 group;
+  @apply flex flex-col items-center gap-4 p-6 rounded-xl transition-all hover:shadow-lg transform hover:-translate-y-1;
 }
 
 .contact-card-linkedin {

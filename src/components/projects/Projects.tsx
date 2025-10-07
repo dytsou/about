@@ -108,7 +108,7 @@ export function Projects() {
                 href={repo.html_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="repo-card"
+                className="repo-card group"
               >
                 <div className="repo-card-header">
                   <h4 className="repo-card-title">

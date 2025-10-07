@@ -14,7 +14,7 @@ export function ContactCard({ platform, title, subtitle, url, icon: Icon }: Cont
       href={url}
       target={platform === 'email' ? undefined : '_blank'}
       rel={platform === 'email' ? undefined : 'noopener noreferrer'}
-      className={`contact-card contact-card-${platform}`}
+      className={`contact-card contact-card-${platform} group`}
     >
       <div className={`contact-card-icon contact-card-icon-${platform}`}>
         <Icon className="contact-card-icon-svg" />

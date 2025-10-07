@@ -1,6 +1,6 @@
 import { ExternalLink } from 'lucide-react';
 import { Button } from '../ui/Button';
-import '../Hero.css';
+import './Hero.css';
 
 interface HeroActionsProps {
   onViewWork: () => void;

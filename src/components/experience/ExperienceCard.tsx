@@ -86,7 +86,7 @@ export function ExperienceCard({ experience }: ExperienceCardProps) {
                       href={post.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="experience-post-link"
+                      className="experience-post-link group"
                     >
                       <div className="experience-post-content">
                         <div className="experience-post-title">
