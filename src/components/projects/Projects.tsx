@@ -1,6 +1,9 @@
 import { Github, Star } from 'lucide-react';
-import { useGitHub } from '../hooks/useGitHub';
+import { useGitHub } from '../../hooks/useGitHub';
 import { ProjectCarousel } from './ProjectCarousel';
+import { Section } from '../layout/Section';
+import { SectionHeader } from '../layout/SectionHeader';
+import './Projects.css';
 
 const STATIC_PROJECTS = [
   {
@@ -81,78 +84,70 @@ export function Projects() {
   ];
 
   return (
-    <section id="projects" className="min-h-screen py-20 bg-white dark:bg-gray-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-12">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-4">
-            Featured Projects
-          </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-cyan-500 mx-auto mb-8"></div>
-          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-            A collection of projects showcasing my skills in backend development, full-stack
-            applications, and game development
-          </p>
+    <Section id="projects">
+      <SectionHeader
+        title="Featured Projects"
+        subtitle="A collection of projects showcasing my skills in backend development, full-stack applications, and game development"
+      />
+
+      {allProjects.length > 0 && (
+        <div>
+          <ProjectCarousel projects={allProjects} featured />
         </div>
+      )}
 
-        {allProjects.length > 0 && (
-          <div>
-            <ProjectCarousel projects={allProjects} featured />
-          </div>
-        )}
-
-        {!reposLoading && repos.length > 0 && (
-          <div className="mt-20">
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-8 text-center">
-              Recent GitHub Activity
-            </h3>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {repos.slice(0, 6).map(repo => (
-                <a
-                  key={repo.name}
-                  href={repo.html_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-6 bg-gray-50 dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-400 transition-all hover:shadow-lg group"
-                >
-                  <div className="flex items-start justify-between mb-3">
-                    <h4 className="font-bold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                      {repo.name}
-                    </h4>
-                    <Github className="w-5 h-5 text-gray-600 dark:text-gray-400" />
-                  </div>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 line-clamp-2">
-                    {repo.description || 'No description available'}
-                  </p>
-                  <div className="flex items-center gap-4 text-sm text-gray-600 dark:text-gray-400">
-                    {repo.language && (
-                      <span className="flex items-center gap-1">
-                        <span className="w-3 h-3 rounded-full bg-blue-500"></span>
-                        {repo.language}
-                      </span>
-                    )}
-                    <span className="flex items-center gap-1">
-                      <Star className="w-4 h-4" />
-                      {repo.stargazers_count}
-                    </span>
-                  </div>
-                </a>
-              ))}
-            </div>
-            <div className="text-center mt-8">
+      {!reposLoading && repos.length > 0 && (
+        <div className="github-activity">
+          <h3 className="github-activity-title">
+            Recent GitHub Activity
+          </h3>
+          <div className="github-repos-grid">
+            {repos.slice(0, 6).map(repo => (
               <a
-                href="https://github.com/dytsou"
+                key={repo.name}
+                href={repo.html_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-gray-900 dark:bg-gray-700 text-white rounded-lg hover:bg-gray-800 dark:hover:bg-gray-600 transition-colors font-semibold"
+                className="repo-card"
               >
-                <Github className="w-5 h-5" />
-                View More on GitHub
+                <div className="repo-card-header">
+                  <h4 className="repo-card-title">
+                    {repo.name}
+                  </h4>
+                  <Github className="repo-card-icon" />
+                </div>
+                <p className="repo-card-description">
+                  {repo.description || 'No description available'}
+                </p>
+                <div className="repo-card-footer">
+                  {repo.language && (
+                    <span className="language-indicator">
+                      <span className="language-dot"></span>
+                      {repo.language}
+                    </span>
+                  )}
+                  <span className="star-indicator">
+                    <Star className="star-icon" />
+                    {repo.stargazers_count}
+                  </span>
+                </div>
               </a>
-            </div>
+            ))}
           </div>
-        )}
-      </div>
-    </section>
+          <div className="github-button-container">
+            <a
+              href="https://github.com/dytsou"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="github-button"
+            >
+              <Github className="github-button-icon" />
+              View More on GitHub
+            </a>
+          </div>
+        </div>
+      )}
+    </Section>
   );
 }
 

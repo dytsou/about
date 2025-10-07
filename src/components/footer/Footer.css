@@ -1,0 +1,52 @@
+/* Footer Component Styles */
+.footer {
+  @apply bg-gray-900 dark:bg-gray-950 text-white py-12;
+}
+
+.footer-container {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+.footer-grid {
+  @apply grid md:grid-cols-3 gap-8 mb-8;
+}
+
+.footer-brand {
+  @apply text-2xl font-bold mb-4;
+}
+
+.footer-description {
+  @apply text-gray-400;
+}
+
+.footer-section-title {
+  @apply text-lg font-semibold mb-4;
+}
+
+.footer-links {
+  @apply space-y-2 text-gray-400;
+}
+
+.footer-link {
+  @apply hover:text-blue-400 transition-colors;
+}
+
+.footer-social-container {
+  @apply flex gap-4;
+}
+
+.footer-social-link {
+  @apply p-3 bg-gray-800 hover:bg-gray-700 rounded-lg transition-colors;
+}
+
+.footer-social-icon {
+  @apply w-5 h-5;
+}
+
+.footer-divider {
+  @apply border-t border-gray-800 pt-8 text-center;
+}
+
+.footer-copyright {
+  @apply text-gray-400 text-sm;
+}

@@ -1,10 +1,10 @@
-import { Navigation } from './components/Navigation';
-import { Hero } from './components/Hero';
-import { About } from './components/About';
-import { Experience } from './components/Experience';
-import { Projects } from './components/Projects';
-import { Contact } from './components/Contact';
-import { Footer } from './components/Footer';
+import { Navigation } from './components/navigation/Navigation';
+import { Hero } from './components/hero/Hero';
+import { About } from './components/about/About';
+import { Experience } from './components/experience/Experience';
+import { Projects } from './components/projects/Projects';
+import { Contact } from './components/contact/Contact';
+import { Footer } from './components/footer/Footer';
 import { useTheme } from './hooks/useTheme';
 
 function App() {

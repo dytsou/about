@@ -1,0 +1,54 @@
+/* Hero Section Styles */
+.hero-section {
+  @apply min-h-screen flex items-center justify-center pt-16;
+  background: linear-gradient(to bottom right,
+      rgb(239 246 255) 0%,
+      rgb(255 255 255) 50%,
+      rgb(236 254 255) 100%);
+}
+
+.dark .hero-section {
+  background: linear-gradient(to bottom right,
+      rgb(17 24 39) 0%,
+      rgb(31 41 55) 50%,
+      rgb(17 24 39) 100%);
+}
+
+.hero-container {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12;
+}
+
+.hero-content {
+  @apply text-center space-y-6 animate-fade-in;
+}
+
+/* Hero Intro Styles */
+.hero-intro {
+  @apply space-y-3;
+}
+
+.hero-title {
+  @apply text-5xl sm:text-6xl lg:text-7xl font-bold text-gray-900 dark:text-white;
+}
+
+.hero-title-gradient {
+  @apply bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent;
+}
+
+.hero-subtitle {
+  @apply text-2xl sm:text-3xl text-gray-700 dark:text-gray-300 font-medium;
+}
+
+.hero-description {
+  @apply text-lg sm:text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed;
+}
+
+/* Hero Actions Styles */
+.hero-actions {
+  @apply flex flex-wrap justify-center gap-4;
+}
+
+/* Hero Social Links Styles */
+.hero-social-links {
+  @apply flex justify-center gap-6 pt-4;
+}

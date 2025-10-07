@@ -1,0 +1,261 @@
+/* Experience Component Styles */
+
+/* Education Card */
+.education-card {
+  @apply mb-16 p-8 bg-white dark:bg-gray-900 rounded-2xl shadow-xl border-l-4 border-blue-600;
+}
+
+.education-card-content {
+  @apply flex items-start gap-4;
+}
+
+.education-icon-container {
+  @apply p-3 bg-blue-100 dark:bg-blue-900/30 rounded-lg;
+}
+
+.education-icon {
+  @apply w-8 h-8 text-blue-600 dark:text-blue-400;
+}
+
+.education-info {
+  @apply flex-1;
+}
+
+.education-institution {
+  @apply text-2xl font-bold text-blue-600 dark:text-blue-400 mb-2;
+}
+
+.education-degree {
+  @apply text-xl text-gray-900 dark:text-white font-semibold mb-3;
+}
+
+.education-meta {
+  @apply flex flex-wrap gap-4 text-sm text-gray-600 dark:text-gray-400 mb-4;
+}
+
+.education-meta-item {
+  @apply flex items-center gap-2;
+}
+
+.education-meta-icon {
+  @apply w-4 h-4;
+}
+
+.education-highlights {
+  @apply space-y-2;
+}
+
+.education-highlight-item {
+  @apply flex items-start gap-2 text-gray-700 dark:text-gray-300;
+}
+
+.education-highlight-bullet {
+  @apply text-blue-600 dark:text-blue-400 mt-1;
+}
+
+/* Experience Timeline */
+.experience-timeline {
+  @apply relative;
+}
+
+.experience-timeline-line {
+  @apply absolute left-8 top-0 bottom-0 w-0.5 bg-gray-300 dark:bg-gray-600;
+}
+
+.experience-timeline-items {
+  @apply space-y-12;
+}
+
+/* Experience Card */
+.experience-card {
+  @apply relative pl-20;
+}
+
+.experience-card-dot {
+  @apply absolute left-6 w-5 h-5 rounded-full border-4 border-white dark:border-gray-800;
+}
+
+.experience-card-dot-blue {
+  @apply bg-blue-600;
+}
+
+.experience-card-dot-cyan {
+  @apply bg-cyan-500;
+}
+
+.experience-card-dot-green {
+  @apply bg-green-600;
+}
+
+.experience-card-dot-purple {
+  @apply bg-purple-600;
+}
+
+.experience-card-content {
+  @apply p-6 rounded-xl border-2 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1;
+}
+
+.experience-card-bg-blue {
+  @apply bg-blue-50 dark:bg-blue-900/20 border-blue-500;
+}
+
+.experience-card-bg-cyan {
+  @apply bg-cyan-50 dark:bg-cyan-900/20 border-cyan-500;
+}
+
+.experience-card-bg-green {
+  @apply bg-green-50 dark:bg-green-900/20 border-green-500;
+}
+
+.experience-card-bg-purple {
+  @apply bg-purple-50 dark:bg-purple-900/20 border-purple-500;
+}
+
+.experience-card-header {
+  @apply flex items-start gap-4;
+}
+
+.experience-card-icon-container {
+  @apply p-3 bg-white dark:bg-gray-800 rounded-lg shadow-md;
+}
+
+.experience-card-icon {
+  @apply w-6 h-6;
+}
+
+.experience-card-icon-blue {
+  @apply text-blue-600 dark:text-blue-400;
+}
+
+.experience-card-icon-cyan {
+  @apply text-cyan-600 dark:text-cyan-400;
+}
+
+.experience-card-icon-green {
+  @apply text-green-600 dark:text-green-400;
+}
+
+.experience-card-icon-purple {
+  @apply text-purple-600 dark:text-purple-400;
+}
+
+.experience-card-info {
+  @apply flex-1;
+}
+
+.experience-card-organization {
+  @apply flex items-center gap-2 mb-1;
+}
+
+.experience-card-organization-title {
+  @apply text-xl font-bold;
+}
+
+.experience-card-organization-title-blue {
+  @apply text-blue-600 dark:text-blue-400;
+}
+
+.experience-card-organization-title-cyan {
+  @apply text-cyan-600 dark:text-cyan-400;
+}
+
+.experience-card-organization-title-green {
+  @apply text-green-600 dark:text-green-400;
+}
+
+.experience-card-organization-title-purple {
+  @apply text-purple-600 dark:text-purple-400;
+}
+
+.experience-card-org-link {
+  @apply text-sm text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors;
+}
+
+.experience-card-org-link-icon {
+  @apply w-4 h-4;
+}
+
+.experience-card-title {
+  @apply text-lg font-semibold text-gray-900 dark:text-white mb-3;
+}
+
+.experience-card-meta {
+  @apply flex flex-wrap gap-4 text-sm text-gray-600 dark:text-gray-400 mb-4;
+}
+
+.experience-card-meta-item {
+  @apply flex items-center gap-2;
+}
+
+.experience-card-meta-icon {
+  @apply w-4 h-4;
+}
+
+.experience-card-description {
+  @apply space-y-2;
+}
+
+.experience-card-description-item {
+  @apply flex items-start gap-2 text-gray-700 dark:text-gray-300;
+}
+
+.experience-card-description-bullet-blue {
+  @apply text-blue-600 dark:text-blue-400;
+}
+
+.experience-card-description-bullet-cyan {
+  @apply text-cyan-600 dark:text-cyan-400;
+}
+
+.experience-card-description-bullet-green {
+  @apply text-green-600 dark:text-green-400;
+}
+
+.experience-card-description-bullet-purple {
+  @apply text-purple-600 dark:text-purple-400;
+}
+
+/* Experience Posts */
+.experience-posts {
+  @apply mt-4;
+}
+
+.experience-posts-list {
+  @apply space-y-2;
+}
+
+.experience-post-link {
+  @apply flex items-center justify-between p-3 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 transition-colors group;
+}
+
+.experience-post-content {
+  @apply flex-1;
+}
+
+.experience-post-title {
+  @apply text-sm font-medium text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors cursor-pointer hover:underline;
+}
+
+.experience-post-subtitle {
+  @apply text-xs text-gray-600 dark:text-gray-400 mt-1;
+}
+
+.experience-post-meta {
+  @apply flex items-center gap-2 mt-1;
+}
+
+.experience-post-date {
+  @apply text-xs text-gray-500 dark:text-gray-400;
+}
+
+.experience-post-separator {
+  @apply text-xs text-gray-400 dark:text-gray-500;
+}
+
+.experience-post-org-label {
+  @apply text-xs text-gray-500 dark:text-gray-400;
+}
+
+.experience-post-icon {
+  @apply w-4 h-4 text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors;
+}
