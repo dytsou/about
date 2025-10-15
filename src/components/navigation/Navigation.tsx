@@ -29,7 +29,7 @@ export function Navigation() {
     { id: 'experience', label: 'Experiences' },
     { id: 'projects', label: 'Projects' },
     { id: 'contact', label: 'Contact' },
-    { id: 'resume', label: 'Resume', external: true, url: 'https://resume.tsou.me' }
+    { id: 'resume', label: 'Resume', external: true, url: 'https://dy.tsou.me/resume' }
   ];
 
   return (

@@ -17,7 +17,7 @@ export function HeroActions({ onViewWork, onGetInTouch }: HeroActionsProps) {
         Get In Touch
       </Button>
       <Button
-        onClick={() => window.open('https://resume.tsou.me', '_blank')}
+        onClick={() => window.open('https://dy.tsou.me/resume', '_blank')}
         variant="secondary"
         size="lg"
         icon={ExternalLink}
