@@ -8,7 +8,8 @@ const FOOTER_SECTIONS = {
       { href: '#about', label: 'About' },
       { href: '#experience', label: 'Experience' },
       { href: '#projects', label: 'Projects' },
-      { href: '#contact', label: 'Contact' }
+      { href: '#contact', label: 'Contact' },
+      { href: 'https://dy.tsou.me/resume', label: 'Resume', external: true }
     ]
   },
   connect: {
@@ -53,7 +54,11 @@ export function Footer() {
             <ul className="footer-links">
               {FOOTER_SECTIONS.quickLinks.links.map((link, index) => (
                 <li key={index}>
-                  <a href={link.href} className="footer-link">
+                  <a
+                    href={link.href}
+                    className="footer-link"
+                    {...(link.external && { target: '_blank', rel: 'noopener noreferrer' })}
+                  >
                     {link.label}
                   </a>
                 </li>
