@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, ComponentType } from 'react';
 import { Github, ExternalLink } from 'lucide-react';
 import { TechTag } from '../ui/TechTag';
 import './ProjectCard.css';
@@ -20,7 +20,7 @@ interface ProjectCardProps {
   projectIndex: number;
   cardStyle: string;
   isMobile: boolean;
-  getProjectIconAndColors: (project: Project) => { Icon: any; iconClass: string };
+  getProjectIconAndColors: (project: Project) => { Icon: ComponentType<{ className?: string }>; iconClass: string };
 }
 
 export function ProjectCard({

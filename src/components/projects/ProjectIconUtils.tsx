@@ -13,8 +13,14 @@ import {
   Puzzle,
   Disc
 } from 'lucide-react';
+import { ComponentType } from 'react';
 
-export function getProjectIconAndColors(project: any) {
+interface Project {
+  title: string;
+  technologies?: string[];
+}
+
+export function getProjectIconAndColors(project: Project): { Icon: ComponentType<{ className?: string }>; bgClass: string; iconClass: string } {
   const tech = (project.technologies || []).map((t: string) => t.toLowerCase());
   const title = String(project.title || '').toLowerCase();
 

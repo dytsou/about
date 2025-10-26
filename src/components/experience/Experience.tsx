@@ -66,8 +66,8 @@ export function Experience() {
       description: [
         'Researching impact of AI-generated testing on software quality',
         'Analyzing test coverage and effectiveness metrics',
-        'Collaborating with PhD students on research methodology',
-        'Contributing to academic publications'
+        'Collaborating with senior members on research methodology',
+        'Contributing to research projects'
       ],
       icon: GraduationCap,
       color: 'green'
