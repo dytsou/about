@@ -10,6 +10,7 @@ Visit the live portfolio at: [https://dytsou.github.io](https://dytsou.github.io
 
 - **Frontend Framework**: React 18 with TypeScript
 - **Build Tool**: Vite
+- **Package Manager**: pnpm
 - **Styling**: Tailwind CSS
 - **Icons**: Lucide React
 - **Deployment**: GitHub Pages
@@ -45,6 +46,44 @@ src/
 - **SEO Optimized**: Meta tags and semantic HTML structure
 - **Fast Performance**: Built with Vite for optimal loading speeds
 
+## Getting Started
+
+### Prerequisites
+
+- Node.js 20 or higher
+- pnpm 10 or higher
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/dytsou/site.git
+
+# Navigate to the project directory
+cd site
+
+# Install dependencies
+pnpm install
+```
+
+### Development
+
+```bash
+# Start development server
+pnpm dev
+
+# Build for production
+pnpm build
+
+# Preview production build
+pnpm preview
+
+# Run type checking
+pnpm typecheck
+
+# Run linter
+pnpm lint
+```
 
 ## License
 
