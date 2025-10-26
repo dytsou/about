@@ -14,7 +14,6 @@ Visit the live portfolio at: [https://dytsou.github.io](https://dytsou.github.io
 - **Styling**: Tailwind CSS
 - **Icons**: Lucide React
 - **Deployment**: GitHub Pages
-- **Database Integration**: Supabase (for future features)
 
 ## Project Structure
 
