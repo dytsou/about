@@ -1,5 +1,6 @@
 import { ExperienceCard } from './ExperienceCard';
 import './Experience.css';
+import { LucideIcon } from 'lucide-react';
 
 interface Post {
   title: string;
@@ -18,7 +19,7 @@ interface Experience {
   location: string;
   description: string[];
   posts?: Post[];
-  icon: any;
+  icon: LucideIcon;
   color: string;
 }
 

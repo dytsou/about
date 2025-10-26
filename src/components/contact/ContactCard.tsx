@@ -1,11 +1,12 @@
 import './Contact.css';
+import { LucideIcon } from 'lucide-react';
 
 interface ContactCardProps {
   platform: 'linkedin' | 'github' | 'email';
   title: string;
   subtitle: string;
   url: string;
-  icon: any;
+  icon: LucideIcon;
 }
 
 export function ContactCard({ platform, title, subtitle, url, icon: Icon }: ContactCardProps) {
