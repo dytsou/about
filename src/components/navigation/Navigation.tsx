@@ -29,7 +29,8 @@ export function Navigation() {
     { id: 'experience', label: 'Experiences' },
     { id: 'projects', label: 'Projects' },
     { id: 'contact', label: 'Contact' },
-    { id: 'resume', label: 'Resume', external: true, url: 'https://dy.tsou.me/resume' }
+    { id: 'resume', label: 'Resume', external: true, url: 'https://dy.tsou.me/resume' },
+    { id: 'cal', label: 'Calendar', external: true, url: 'https://tsou.me/cal' }
   ];
 
   return (
