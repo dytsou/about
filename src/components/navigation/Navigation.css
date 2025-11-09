@@ -10,7 +10,7 @@
 }
 
 .nav-scrolled {
-  @apply bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-lg;
+  @apply bg-white/80 dark:bg-transparent backdrop-blur-md shadow-lg;
 }
 
 .nav-container {
@@ -23,13 +23,13 @@
 
 .nav-brand {
   @apply text-2xl font-bold;
-  @apply text-gray-900;
+  @apply text-gray-500;
   @apply hover:text-blue-600 transition-colors;
 }
 
 .dark .nav-brand {
-  @apply text-white;
-  @apply hover:text-blue-400;
+  @apply text-gray-500;
+  @apply hover:text-blue-600;
 }
 
 .nav-desktop-menu {
@@ -37,12 +37,12 @@
 }
 
 .nav-link {
-  @apply text-gray-700;
+  @apply text-gray-500;
   @apply hover:text-blue-600 transition-colors font-medium;
 }
 
 .dark .nav-link {
-  @apply text-gray-300;
+  @apply text-gray-500;
   @apply hover:text-blue-400;
 }
 
