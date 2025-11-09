@@ -4,7 +4,7 @@ import './Button.css';
 interface IconButtonProps {
   icon: LucideIcon;
   onClick?: () => void;
-  variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
+  variant?: 'primary' | 'secondary' | 'tertiary' | 'outline' | 'ghost';
   size?: 'sm' | 'md' | 'lg';
   className?: string;
   disabled?: boolean;
@@ -23,6 +23,7 @@ export function IconButton({
   const variantClasses = {
     primary: 'icon-btn-primary',
     secondary: 'icon-btn-secondary',
+    tertiary: 'icon-btn-tertiary',
     outline: 'icon-btn-outline',
     ghost: 'icon-btn-ghost'
   };
