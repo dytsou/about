@@ -68,12 +68,13 @@ export function Navigation() {
             <button
               onClick={toggleTheme}
               className="nav-theme-toggle"
-              aria-label="Toggle theme"
+              aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+              title={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
             >
               {theme === 'light' ? (
-                <Moon className="nav-theme-icon nav-theme-icon-light" />
+                <Moon key="moon" className="nav-theme-icon nav-theme-icon-light" />
               ) : (
-                <Sun className="nav-theme-icon nav-theme-icon-dark" />
+                <Sun key="sun" className="nav-theme-icon nav-theme-icon-dark" />
               )}
             </button>
           </div>
@@ -82,12 +83,13 @@ export function Navigation() {
             <button
               onClick={toggleTheme}
               className="nav-mobile-toggle"
-              aria-label="Toggle theme"
+              aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+              title={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
             >
               {theme === 'light' ? (
-                <Moon className="nav-theme-icon nav-theme-icon-light" />
+                <Moon key="moon-mobile" className="nav-theme-icon nav-theme-icon-light" />
               ) : (
-                <Sun className="nav-theme-icon nav-theme-icon-dark" />
+                <Sun key="sun-mobile" className="nav-theme-icon nav-theme-icon-dark" />
               )}
             </button>
             <button

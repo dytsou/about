@@ -43,7 +43,12 @@
 }
 
 .hero-title {
-  @apply text-5xl sm:text-6xl lg:text-7xl font-bold text-gray-900 dark:text-white;
+  @apply text-5xl sm:text-6xl lg:text-7xl font-bold;
+  @apply text-gray-900;
+}
+
+.dark .hero-title {
+  @apply text-white;
 }
 
 .hero-title-gradient {
@@ -51,11 +56,11 @@
 }
 
 .hero-subtitle {
-  @apply text-2xl sm:text-3xl text-gray-700 dark:text-gray-300 font-medium;
+  @apply text-2xl sm:text-3xl text-gray-500 dark:text-gray-400 font-medium leading-relaxed;
 }
 
 .hero-description {
-  @apply text-lg sm:text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed;
+  @apply text-lg sm:text-xl text-gray-700 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed;
 }
 
 /* Hero Actions Styles */
