@@ -1,3 +1,5 @@
+@reference "tailwindcss";
+
 /* Footer Component Styles */
 .footer {
   @apply bg-gray-900 dark:bg-gray-950 text-white py-12;

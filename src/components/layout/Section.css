@@ -1,3 +1,5 @@
+@reference "tailwindcss";
+
 /* Section Layout Styles */
 .section-base {
   @apply min-h-screen py-20;

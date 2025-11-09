@@ -1,3 +1,5 @@
+@reference "tailwindcss";
+
 /* Button Component Styles */
 .btn-base {
   @apply font-semibold transition-all transform hover:scale-105 shadow-lg hover:shadow-xl rounded-lg;

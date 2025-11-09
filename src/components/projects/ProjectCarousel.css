@@ -1,3 +1,5 @@
+@reference "tailwindcss";
+
 /* Project Carousel Styles */
 .carousel-container {
   @apply relative w-full;
