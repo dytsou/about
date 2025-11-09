@@ -251,7 +251,7 @@
 }
 
 .experience-post-separator {
-  @apply text-xs text-gray-400 dark:text-gray-500;
+  @apply text-xs text-gray-600 dark:text-gray-500;
 }
 
 .experience-post-org-label {
@@ -259,5 +259,5 @@
 }
 
 .experience-post-icon {
-  @apply w-4 h-4 text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors;
+  @apply w-4 h-4 text-gray-600 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors;
 }

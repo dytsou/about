@@ -76,12 +76,16 @@
   @apply bg-cyan-500 hover:bg-cyan-600 text-white;
 }
 
+.icon-btn-tertiary {
+  @apply bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-900 dark:text-white;
+}
+
 .icon-btn-outline {
   @apply bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-900 dark:text-white border-2 border-gray-300 dark:border-gray-600;
 }
 
 .icon-btn-ghost {
-  @apply bg-gray-900 dark:bg-gray-700 hover:bg-gray-800 dark:hover:bg-gray-600 text-white;
+  @apply bg-gray-900 dark:bg-gray-700 hover:bg-gray-800 dark:hover:bg-gray-600 text-white dark:text-white;
 }
 
 .icon-btn-sm {
