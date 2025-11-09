@@ -12,6 +12,10 @@ updates:
       include: "scope"
     labels:
       - "dependencies"
+    assignees:
+      - "dytsou"
+    reviewers:
+      - "dytsou"
 
   # Enable version updates for GitHub Actions
   - package-ecosystem: "github-actions"
@@ -25,3 +29,7 @@ updates:
       include: "scope"
     labels:
       - "dependencies"
+    assignees:
+      - "dytsou"
+    reviewers:
+      - "dytsou"
