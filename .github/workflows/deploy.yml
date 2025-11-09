@@ -32,7 +32,7 @@ jobs:
         run: pnpm build
 
       - name: Deploy to dytsou.github.io
-        uses: JamesIves/github-pages-deploy-action@v4
+        uses: JamesIves/github-pages-deploy-action@v4.7.4
         with:
           token: ${{ secrets.GH_PAGES_TOKEN }}
           repository-name: dytsou/dytsou.github.io
