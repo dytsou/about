@@ -9,7 +9,8 @@ const FOOTER_SECTIONS = {
       { href: '#experience', label: 'Experience' },
       { href: '#projects', label: 'Projects' },
       { href: '#contact', label: 'Contact' },
-      { href: 'https://dy.tsou.me/resume', label: 'Resume', external: true }
+      { href: 'https://dy.tsou.me/resume', label: 'Resume', external: true },
+      { href: 'https://tsou.me/cal', label: 'Calendar', external: true }
     ]
   },
   connect: {
