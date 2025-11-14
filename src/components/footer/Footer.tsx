@@ -1,4 +1,4 @@
-import { Github, Linkedin, Mail } from 'lucide-react';
+import { Github, Linkedin, Mail, Send } from 'lucide-react';
 import './Footer.css';
 
 const FOOTER_SECTIONS = {
@@ -30,6 +30,11 @@ const FOOTER_SECTIONS = {
         href: 'mailto:contact@dy.tsou.me',
         icon: Mail,
         label: 'Email'
+      },
+      {
+        href: 'https://t.me/dytsou',
+        icon: Send,
+        label: 'Telegram'
       }
     ]
   }

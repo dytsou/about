@@ -1,4 +1,4 @@
-import { Github, Linkedin, Mail, Calendar } from 'lucide-react';
+import { Github, Linkedin, Mail, Calendar, Send } from 'lucide-react';
 import { IconButton } from '../ui/IconButton';
 import './Hero.css';
 
@@ -21,14 +21,21 @@ export function HeroSocialLinks() {
       />
       <IconButton
         icon={Mail}
-        variant="secondary"
+        variant="outline"
         size="lg"
         onClick={() => window.open('mailto:contact@dy.tsou.me', '_blank')}
         aria-label="Email"
       />
       <IconButton
+        icon={Send}
+        variant="secondary"
+        size="lg"
+        onClick={() => window.open('https://t.me/dytsou', '_blank')}
+        aria-label="Telegram"
+      />
+      <IconButton
         icon={Calendar}
-        variant="tertiary"
+        variant="outline"
         size="lg"
         onClick={() => window.open('https://tsou.me/cal', '_blank')}
         aria-label="Calendar"
