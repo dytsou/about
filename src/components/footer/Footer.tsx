@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { Github, Linkedin, Mail, Send } from 'lucide-react';
 import './Footer.css';
 
@@ -5,10 +6,10 @@ const FOOTER_SECTIONS = {
   quickLinks: {
     title: 'Quick Links',
     links: [
-      { href: '#about', label: 'About' },
-      { href: '#experience', label: 'Experience' },
-      { href: '#projects', label: 'Projects' },
-      { href: '#contact', label: 'Contact' },
+      { href: '/about', label: 'About', internal: true },
+      { href: '/experience', label: 'Experience', internal: true },
+      { href: '/projects', label: 'Projects', internal: true },
+      { href: '/contact', label: 'Contact', internal: true },
       { href: 'https://dy.tsou.me/resume', label: 'Resume', external: true },
       { href: 'https://tsou.me/cal', label: 'Calendar', external: true }
     ]
@@ -60,13 +61,22 @@ export function Footer() {
             <ul className="footer-links">
               {FOOTER_SECTIONS.quickLinks.links.map((link, index) => (
                 <li key={index}>
-                  <a
-                    href={link.href}
-                    className="footer-link"
-                    {...(link.external && { target: '_blank', rel: 'noopener noreferrer' })}
-                  >
-                    {link.label}
-                  </a>
+                  {link.internal ? (
+                    <Link
+                      to={link.href}
+                      className="footer-link"
+                    >
+                      {link.label}
+                    </Link>
+                  ) : (
+                    <a
+                      href={link.href}
+                      className="footer-link"
+                      {...(link.external && { target: '_blank', rel: 'noopener noreferrer' })}
+                    >
+                      {link.label}
+                    </a>
+                  )}
                 </li>
               ))}
             </ul>

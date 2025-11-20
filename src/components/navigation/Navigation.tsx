@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Moon, Sun } from 'lucide-react';
 import { useTheme } from '../../hooks/useTheme';
 import './Navigation.css';
@@ -7,6 +8,7 @@ export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const { theme, toggleTheme } = useTheme();
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -16,39 +18,31 @@ export function Navigation() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-      setIsOpen(false);
-    }
-  };
-
   const navLinks = [
-    { id: 'about', label: 'About' },
-    { id: 'experience', label: 'Experiences' },
-    { id: 'projects', label: 'Projects' },
-    { id: 'contact', label: 'Contact' },
-    { id: 'resume', label: 'Resume', external: true, url: 'https://dy.tsou.me/resume' }
+    { path: '/about', label: 'About' },
+    { path: '/experience', label: 'Experiences' },
+    { path: '/projects', label: 'Projects' },
+    { path: '/contact', label: 'Contact' },
+    { path: 'https://dy.tsou.me/resume', label: 'Resume', external: true }
   ];
 
   return (
     <nav className={`nav ${isScrolled ? 'nav-scrolled' : 'nav-transparent'}`}>
       <div className="nav-container">
         <div className="nav-content">
-          <button
-            onClick={() => scrollToSection('hero')}
+          <Link
+            to="/"
             className="nav-brand"
           >
             dytsou
-          </button>
+          </Link>
 
           <div className="nav-desktop-menu">
             {navLinks.map(link => (
               link.external ? (
                 <a
-                  key={link.id}
-                  href={link.url}
+                  key={link.path}
+                  href={link.path}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="nav-link"
@@ -56,13 +50,13 @@ export function Navigation() {
                   {link.label}
                 </a>
               ) : (
-                <button
-                  key={link.id}
-                  onClick={() => scrollToSection(link.id)}
-                  className="nav-link"
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  className={`nav-link ${location.pathname === link.path ? 'nav-link-active' : ''}`}
                 >
                   {link.label}
-                </button>
+                </Link>
               )
             ))}
             <button
@@ -113,8 +107,8 @@ export function Navigation() {
             {navLinks.map(link => (
               link.external ? (
                 <a
-                  key={link.id}
-                  href={link.url}
+                  key={link.path}
+                  href={link.path}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="nav-mobile-link"
@@ -123,13 +117,14 @@ export function Navigation() {
                   {link.label}
                 </a>
               ) : (
-                <button
-                  key={link.id}
-                  onClick={() => scrollToSection(link.id)}
-                  className="nav-mobile-link"
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  className={`nav-mobile-link ${location.pathname === link.path ? 'nav-link-active' : ''}`}
+                  onClick={() => setIsOpen(false)}
                 >
                   {link.label}
-                </button>
+                </Link>
               )
             ))}
           </div>

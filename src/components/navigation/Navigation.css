@@ -41,9 +41,17 @@
   @apply hover:text-blue-600 transition-colors font-medium;
 }
 
+.nav-link-active {
+  @apply text-blue-600;
+}
+
 .dark .nav-link {
   @apply text-gray-500;
   @apply hover:text-blue-400;
+}
+
+.dark .nav-link-active {
+  @apply text-blue-400;
 }
 
 .nav-theme-toggle {
@@ -208,7 +216,15 @@
   @apply hover:bg-gray-100 rounded-lg transition-colors;
 }
 
+.nav-mobile-link.nav-link-active {
+  @apply text-blue-600 bg-blue-50;
+}
+
 .dark .nav-mobile-link {
   @apply text-gray-300;
   @apply hover:bg-gray-800;
+}
+
+.dark .nav-mobile-link.nav-link-active {
+  @apply text-blue-400 bg-blue-900/20;
 }

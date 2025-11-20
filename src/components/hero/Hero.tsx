@@ -1,15 +1,11 @@
+import { useNavigate } from 'react-router-dom';
 import { HeroIntro } from './HeroIntro';
 import { HeroActions } from './HeroActions';
 import { HeroSocialLinks } from './HeroSocialLinks';
 import './Hero.css';
 
 export function Hero() {
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+  const navigate = useNavigate();
 
   return (
     <section id="hero" className="hero-section">
@@ -17,8 +13,8 @@ export function Hero() {
         <div className="hero-content">
           <HeroIntro />
           <HeroActions
-            onViewWork={() => scrollToSection('projects')}
-            onGetInTouch={() => scrollToSection('contact')}
+            onViewWork={() => navigate('/projects')}
+            onGetInTouch={() => navigate('/contact')}
           />
           <HeroSocialLinks />
         </div>
