@@ -11,7 +11,7 @@ const FOOTER_SECTIONS = {
       { href: '/projects', label: 'Projects', internal: true },
       { href: '/contact', label: 'Contact', internal: true },
       { href: 'https://dy.tsou.me/resume', label: 'Resume', external: true },
-      { href: 'https://tsou.me/cal', label: 'Calendar', external: true }
+      { href: 'https://dy.tsou.me/cal', label: 'Calendar', external: true }
     ]
   },
   connect: {

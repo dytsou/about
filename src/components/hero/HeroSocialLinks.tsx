@@ -37,7 +37,7 @@ export function HeroSocialLinks() {
         icon={Calendar}
         variant="outline"
         size="lg"
-        onClick={() => window.open('https://tsou.me/cal', '_blank')}
+        onClick={() => window.open('https://dy.tsou.me/cal', '_blank')}
         aria-label="Calendar"
       />
     </div>
