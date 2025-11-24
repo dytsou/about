@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { ProjectCard } from './ProjectCard';
 import { getProjectIconAndColors } from './ProjectIconUtils';
 import { CarouselControls } from './CarouselControls';
@@ -21,62 +21,61 @@ interface ProjectCarouselProps {
   featured?: boolean;
 }
 
+const CARD_STYLES = ['card-style-primary', 'card-style-secondary', 'card-style-tertiary'];
+
+const getCardsPerSlideForWidth = (width: number) => {
+  if (width >= 1440) return 4;
+  if (width >= 1024) return 3;
+  if (width >= 640) return 2;
+  return 1;
+};
+
 export function ProjectCarousel({ projects }: ProjectCarouselProps) {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [isMobile, setIsMobile] = useState(false);
+  const [cardsPerSlide, setCardsPerSlide] = useState(() => {
+    if (typeof window === 'undefined') return 1;
+    return getCardsPerSlideForWidth(window.innerWidth);
+  });
 
-  // Check screen size and update mobile state
   useEffect(() => {
-    const checkScreenSize = () => {
-      setIsMobile(window.innerWidth < 1280);
+    const handleResize = () => {
+      setCardsPerSlide(getCardsPerSlideForWidth(window.innerWidth));
     };
 
-    checkScreenSize();
-    window.addEventListener('resize', checkScreenSize);
-
-    return () => window.removeEventListener('resize', checkScreenSize);
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  if (projects.length === 0) return null;
+  const slides = useMemo(() => {
+    if (projects.length === 0) return [];
+    const groups: Project[][] = [];
+    for (let i = 0; i < projects.length; i += cardsPerSlide) {
+      groups.push(projects.slice(i, i + cardsPerSlide));
+    }
+    return groups;
+  }, [projects, cardsPerSlide]);
 
-  // Create carousel items - responsive: 1 project on mobile, 3 on desktop
-  const carouselItems = isMobile
-    ? projects.map((project, index) => ({
-      firstProject: project,
-      secondProject: null,
-      firstIndex: index,
-      secondIndex: null,
-      thirdProject: null,
-      thirdIndex: null
-    }))
-    : (() => {
-      const items = [];
-      for (let i = 0; i < projects.length; i += 3) {
-        const firstProject = projects[i];
-        const secondProject = projects[(i + 1) % projects.length];
-        const thirdProject = projects[(i + 2) % projects.length];
-        items.push({
-          firstProject: firstProject,
-          secondProject: secondProject,
-          firstIndex: i,
-          secondIndex: (i + 1) % projects.length,
-          thirdProject: thirdProject,
-          thirdIndex: (i + 2) % projects.length
-        });
-      }
-      return items;
-    })();
+  const slideCount = slides.length;
+  const isSingleColumn = cardsPerSlide === 1;
+
+  if (slideCount === 0) return null;
+
+  const currentSlideClamped = Math.min(currentSlide, Math.max(slideCount - 1, 0));
 
   const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % carouselItems.length);
+    if (slideCount === 0) return;
+    setCurrentSlide(prev => (prev + 1) % slideCount);
   };
 
   const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + carouselItems.length) % carouselItems.length);
+    if (slideCount === 0) return;
+    setCurrentSlide(prev => (prev - 1 + slideCount) % slideCount);
   };
 
   const goToSlide = (index: number) => {
-    setCurrentSlide(index);
+    if (slideCount === 0) return;
+    setCurrentSlide(Math.max(0, Math.min(index, slideCount - 1)));
   };
 
   return (
@@ -85,36 +84,32 @@ export function ProjectCarousel({ projects }: ProjectCarouselProps) {
         <div className="carousel-track">
           <div
             className="carousel-slides"
-            style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+            style={{ transform: `translateX(-${currentSlideClamped * 100}%)` }}
           >
-            {carouselItems.map((item, index) => (
-              <div key={index} className="carousel-slide">
-                <div className={`carousel-slide-content ${isMobile ? 'mobile' : 'desktop'}`}>
-                  <ProjectCard
-                    project={item.firstProject}
-                    projectIndex={item.firstIndex}
-                    cardStyle="card-style-primary"
-                    isMobile={isMobile}
-                    getProjectIconAndColors={getProjectIconAndColors}
-                  />
-                  {!isMobile && item.secondProject && (
-                    <ProjectCard
-                      project={item.secondProject}
-                      projectIndex={item.secondIndex}
-                      cardStyle="card-style-secondary"
-                      isMobile={isMobile}
-                      getProjectIconAndColors={getProjectIconAndColors}
-                    />
-                  )}
-                  {!isMobile && item.thirdProject && (
-                    <ProjectCard
-                      project={item.thirdProject}
-                      projectIndex={item.thirdIndex}
-                      cardStyle="card-style-tertiary"
-                      isMobile={isMobile}
-                      getProjectIconAndColors={getProjectIconAndColors}
-                    />
-                  )}
+            {slides.map((slideProjects, slideIndex) => (
+              <div key={slideIndex} className="carousel-slide">
+                <div
+                  className={`carousel-slide-content ${isSingleColumn ? 'single-column' : 'multi-column'}`}
+                  style={
+                    isSingleColumn
+                      ? undefined
+                      : { gridTemplateColumns: `repeat(${Math.min(cardsPerSlide, slideProjects.length)}, minmax(0, 1fr))` }
+                  }
+                >
+                  {slideProjects.map((project, projectIdx) => {
+                    const globalIndex = slideIndex * cardsPerSlide + projectIdx;
+                    const cardStyle = CARD_STYLES[globalIndex % CARD_STYLES.length];
+                    return (
+                      <ProjectCard
+                        key={project.id}
+                        project={project}
+                        projectIndex={globalIndex}
+                        cardStyle={cardStyle}
+                        isMobile={isSingleColumn}
+                        getProjectIconAndColors={getProjectIconAndColors}
+                      />
+                    );
+                  })}
                 </div>
               </div>
             ))}
@@ -124,8 +119,8 @@ export function ProjectCarousel({ projects }: ProjectCarouselProps) {
         <CarouselControls
           onPrev={prevSlide}
           onNext={nextSlide}
-          currentSlide={currentSlide}
-          totalSlides={carouselItems.length}
+          currentSlide={currentSlideClamped}
+          totalSlides={slideCount}
           onGoToSlide={goToSlide}
         />
       </div>

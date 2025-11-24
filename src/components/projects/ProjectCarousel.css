@@ -25,11 +25,11 @@
   @apply gap-6 min-h-[350px] lg:min-h-[400px] p-6;
 }
 
-.carousel-slide-content.desktop {
-  @apply grid xl:grid-cols-3;
+.carousel-slide-content.multi-column {
+  @apply grid;
 }
 
-.carousel-slide-content.mobile {
+.carousel-slide-content.single-column {
   @apply flex justify-center;
 }
 
