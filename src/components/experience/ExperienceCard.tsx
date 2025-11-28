@@ -1,27 +1,12 @@
 import { useState, useEffect } from 'react';
-import { LucideIcon, Calendar, MapPin, ExternalLink } from 'lucide-react';
 import './Experience.css';
-
-interface Post {
-  title: string;
-  subtitle?: string;
-  url: string;
-  orgUrl?: string;
-  date: string;
-}
-
-interface Experience {
-  type: string;
-  title: string;
-  organization: string;
-  orgUrl?: string;
-  period: string;
-  location: string;
-  description: string[];
-  posts?: Post[];
-  icon: LucideIcon;
-  color: string;
-}
+import { ExperienceCardDot } from './ExperienceCardDot';
+import { ExperienceOrganization } from './ExperienceOrganization';
+import { ExperienceMeta } from './ExperienceMeta';
+import { ExperienceDescription } from './ExperienceDescription';
+import { ExperiencePosts } from './ExperiencePosts';
+import { ExperienceCardToggle } from './ExperienceCardToggle';
+import { Experience } from './types';
 
 interface ExperienceCardProps {
   experience: Experience;
@@ -47,11 +32,7 @@ export function ExperienceCard({ experience }: ExperienceCardProps) {
 
   return (
     <div className="experience-card">
-      <div className={`experience-card-dot experience-card-dot-${experience.color}`}>
-        {isMobile && (
-          <Icon className={`experience-card-dot-icon experience-card-dot-icon-${experience.color}`} />
-        )}
-      </div>
+      <ExperienceCardDot Icon={Icon} color={experience.color} isMobile={isMobile} />
 
       <div className={`experience-card-content experience-card-bg-${experience.color}`}>
         <div className="experience-card-header">
@@ -61,98 +42,28 @@ export function ExperienceCard({ experience }: ExperienceCardProps) {
             </div>
           )}
           <div className="experience-card-info">
-            <div className="experience-card-organization">
-              <h3 className={`experience-card-organization-title experience-card-organization-title-${experience.color}`}>
-                {experience.organization}
-              </h3>
-              {experience.orgUrl && (
-                <a
-                  href={experience.orgUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="experience-card-org-link"
-                  title="Visit organization website"
-                >
-                  <ExternalLink className="experience-card-org-link-icon" />
-                </a>
-              )}
-            </div>
+            <ExperienceOrganization
+              organization={experience.organization}
+              orgUrl={experience.orgUrl}
+              color={experience.color}
+            />
             <div className="experience-card-title">
               {experience.title}
             </div>
-            <div className="experience-card-meta">
-              <div className="experience-card-meta-item">
-                <Calendar className="experience-card-meta-icon" />
-                {experience.period}
-              </div>
-              <div className="experience-card-meta-item">
-                <MapPin className="experience-card-meta-icon" />
-                {experience.location}
-              </div>
-            </div>
+            <ExperienceMeta period={experience.period} location={experience.location} />
+            
             {isContentVisible && (
               <>
-                {experience.description.length > 0 && (
-                  <ul className="experience-card-description">
-                    {experience.description.map((item, idx) => (
-                      <li key={idx} className="experience-card-description-item">
-                        <span className={`experience-card-description-bullet-${experience.color}`}>•</span>
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-
-                {experience.posts && experience.posts.length > 0 && (
-                  <div className="experience-posts">
-                    <div className="experience-posts-list">
-                      {experience.posts.map((post, idx) => (
-                        <a
-                          key={idx}
-                          href={post.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="experience-post-link group"
-                        >
-                          <div className="experience-post-content">
-                            <div className="experience-post-title">
-                              {post.title}
-                            </div>
-                            {post.subtitle && (
-                              <div className="experience-post-subtitle">
-                                {post.subtitle}
-                              </div>
-                            )}
-                            <div className="experience-post-meta">
-                              <div className="experience-post-date">
-                                {post.date}
-                              </div>
-                              {post.orgUrl && (
-                                <>
-                                  <span className="experience-post-separator">•</span>
-                                  <span className="experience-post-org-label">
-                                    Organization
-                                  </span>
-                                </>
-                              )}
-                            </div>
-                          </div>
-                          <ExternalLink className="experience-post-icon" />
-                        </a>
-                      ))}
-                    </div>
-                  </div>
-                )}
+                <ExperienceDescription description={experience.description} color={experience.color} />
+                {experience.posts && <ExperiencePosts posts={experience.posts} />}
               </>
             )}
+            
             {shouldShowToggle && (
-              <button
-                onClick={() => setIsContentExpanded(!isContentExpanded)}
-                className="experience-card-content-toggle"
-                aria-label={isContentExpanded ? 'Collapse details' : 'Expand details'}
-              >
-                {isContentExpanded ? 'See less' : 'See more'}
-              </button>
+              <ExperienceCardToggle
+                isExpanded={isContentExpanded}
+                onToggle={() => setIsContentExpanded(!isContentExpanded)}
+              />
             )}
           </div>
         </div>
