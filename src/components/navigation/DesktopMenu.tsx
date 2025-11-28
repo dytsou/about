@@ -1,6 +1,6 @@
 import { ThemeToggleButton } from './ThemeToggleButton';
 import { NavLinkComponent } from './NavLinks';
-import { navLinks } from './NavLinks';
+import { navLinks } from './navLinksConfig';
 import './Navigation.css';
 
 export function DesktopMenu() {
