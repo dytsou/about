@@ -1,5 +1,5 @@
 import { NavLinkComponent } from './NavLinks';
-import { navLinks } from './NavLinks';
+import { navLinks } from './navLinksConfig';
 import './Navigation.css';
 
 interface MobileMenuProps {

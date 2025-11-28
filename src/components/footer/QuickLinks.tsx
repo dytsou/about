@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import { FooterLinkComponent } from './FooterLinks';
-import { FOOTER_SECTIONS } from './FooterLinks';
+import { FOOTER_SECTIONS } from './footerLinksConfig';
 import './Footer.css';
 
 interface QuickLinksComponentProps {
