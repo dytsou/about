@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { GitHubRepo } from '../../types';
+import { GitHubRepo } from '../../../types';
 import { RepoCardHeader } from './RepoCardHeader';
 import { RepoCardDescription } from './RepoCardDescription';
 import { RepoCardFooter } from './RepoCardFooter';

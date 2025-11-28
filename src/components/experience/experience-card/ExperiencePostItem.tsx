@@ -1,5 +1,5 @@
 import { ExternalLink } from 'lucide-react';
-import { Post } from './types';
+import { Post } from '../types';
 
 interface ExperiencePostItemProps {
   post: Post;
