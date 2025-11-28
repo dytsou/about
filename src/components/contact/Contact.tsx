@@ -1,33 +1,9 @@
-import { Mail, Github, Linkedin } from 'lucide-react';
 import { Section } from '../layout/Section';
 import { SectionHeader } from '../layout/SectionHeader';
 import { ContactCard } from './ContactCard';
 import { OpportunityList } from './OpportunityList';
+import { CONTACT_CARDS } from './ContactLinks';
 import './Contact.css';
-
-const CONTACT_CARDS = [
-  {
-    platform: 'linkedin' as const,
-    title: 'LinkedIn',
-    subtitle: 'https://www.linkedin.com/in/dytsou/',
-    url: 'https://www.linkedin.com/in/dytsou/',
-    icon: Linkedin
-  },
-  {
-    platform: 'github' as const,
-    title: 'GitHub',
-    subtitle: '@dytsou',
-    url: 'https://github.com/dytsou',
-    icon: Github
-  },
-  {
-    platform: 'email' as const,
-    title: 'Email Me',
-    subtitle: 'contact@dy.tsou.me',
-    url: 'mailto:contact@dy.tsou.me',
-    icon: Mail
-  }
-];
 
 export function Contact() {
   return (
