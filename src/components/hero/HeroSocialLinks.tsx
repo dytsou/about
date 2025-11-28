@@ -2,7 +2,7 @@ import { Github, Linkedin, Mail, Calendar, Send } from 'lucide-react';
 import { IconButton } from '../ui/IconButton';
 import './Hero.css';
 
-export function HeroSocialLinks() {
+export const HeroSocialLinks = () => {
   return (
     <div className="hero-social-links">
       <IconButton
@@ -42,4 +42,4 @@ export function HeroSocialLinks() {
       />
     </div>
   );
-}
+};

@@ -1,8 +1,9 @@
 import { useNavigate } from 'react-router-dom';
-import { HeroIntro } from './HeroIntro';
+import { HeroIntro } from '../contents/HeroIntro';
 import { HeroActions } from './HeroActions';
 import { HeroSocialLinks } from './HeroSocialLinks';
 import './Hero.css';
+
 
 export function Hero() {
   const navigate = useNavigate();
