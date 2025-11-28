@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Github, Star, ChevronDown, ChevronUp } from 'lucide-react';
 import { GitHubRepo } from '../../types';
 import './GitHubActivity.css';
@@ -14,8 +14,34 @@ interface RepoCardProps {
 
 function RepoCard({ repo }: RepoCardProps) {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [shouldShowToggle, setShouldShowToggle] = useState(false);
+  const descriptionRef = useRef<HTMLParagraphElement | null>(null);
   const description = repo.description || 'No description available';
-  const hasLongDescription = description.length > 100;
+
+  useEffect(() => {
+    const measureOverflow = () => {
+      const element = descriptionRef.current;
+      if (!element) return;
+
+      if (isExpanded) {
+        // When expanded, check if it would overflow when collapsed
+        element.classList.add('repo-card-description-clamped');
+        const hasOverflow = element.scrollHeight > element.clientHeight;
+        element.classList.remove('repo-card-description-clamped');
+        setShouldShowToggle(hasOverflow);
+      } else {
+        // When collapsed, check if content overflows
+        const hasOverflow = element.scrollHeight > element.clientHeight;
+        setShouldShowToggle(hasOverflow);
+      }
+    };
+
+    measureOverflow();
+    window.addEventListener('resize', measureOverflow);
+    return () => {
+      window.removeEventListener('resize', measureOverflow);
+    };
+  }, [description, isExpanded]);
 
   const handleToggleExpand = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -37,10 +63,13 @@ function RepoCard({ repo }: RepoCardProps) {
         <Github className="repo-card-icon" />
       </div>
       <div className="repo-card-description-wrapper">
-        <p className={`repo-card-description ${!isExpanded ? 'repo-card-description-clamped' : ''}`}>
+        <p
+          ref={descriptionRef}
+          className={`repo-card-description ${!isExpanded ? 'repo-card-description-clamped' : ''}`}
+        >
           {description}
         </p>
-        {hasLongDescription && (
+        {shouldShowToggle && (
           <button
             onClick={handleToggleExpand}
             className="repo-card-more-button"
