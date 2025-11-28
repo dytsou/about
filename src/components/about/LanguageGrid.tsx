@@ -50,20 +50,20 @@ export function LanguageGrid() {
           )}
         </h5>
         {isContentVisible && (
-          <div className="language-grid-list">
-            {LANGUAGES.map((lang) => (
-              <div key={lang.name} className="language-item">
-                <div
-                  className={`language-dot`}
-                  style={{ backgroundColor: lang.color || '#9ca3af' }}
-                ></div>
-                <div className={`language-name ${lang.name.length > 10 ? 'language-name-xs' : 'language-name-sm'
-                  }`}>
-                  {lang.name}
-                </div>
+        <div className="language-grid-list">
+          {LANGUAGES.map((lang) => (
+            <div key={lang.name} className="language-item">
+              <div
+                className={`language-dot`}
+                style={{ backgroundColor: lang.color || '#9ca3af' }}
+              ></div>
+              <div className={`language-name ${lang.name.length > 10 ? 'language-name-xs' : 'language-name-sm'
+                }`}>
+                {lang.name}
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
+        </div>
         )}
       </div>
     </div>
