@@ -1,19 +1,64 @@
 name: Deploy to dytsou.github.io
 
 on:
-  push:
-    branches: [ main ]
+  workflow_run:
+    workflows: ["CI"]
+    types:
+      - completed
+    branches: [main]
   workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
-  build_and_deploy:
+  checks:
+    # Run checks for manual workflow_dispatch (CI already ran for workflow_run)
+    if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source
         uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 20
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run linter
+        run: pnpm lint
+
+      - name: Run type check
+        run: pnpm typecheck
+
+      - name: Build site
+        run: pnpm build
+
+  deploy:
+    # Only deploy if:
+    # - CI workflow completed successfully (for workflow_run), OR
+    # - checks job completed successfully (for workflow_dispatch)
+    needs: [checks]
+    if: |
+      always() &&
+      (
+        (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success') ||
+        (github.event_name == 'workflow_dispatch' && needs.checks.result == 'success')
+      )
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.workflow_run.head_branch || github.ref }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v6
@@ -48,5 +93,3 @@ jobs:
             safe-browsing-warning.html
             public/**
           single-commit: true
-
-
