@@ -20,12 +20,46 @@
 }
 
 .contact-grid {
-  @apply grid md:grid-cols-3 gap-6;
+  @apply flex flex-row flex-wrap justify-center items-center md:grid md:grid-cols-3;
+  gap: clamp(2rem, 10vw, 6rem);
+  max-width: 100%;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .contact-grid {
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .contact-section {
+    @apply w-full;
+  }
+  
+  .contact-grid {
+    @apply justify-evenly;
+    gap: clamp(2.5rem, 12vw, 7rem);
+    padding: 0 1rem;
+  }
 }
 
 /* Contact Card */
 .contact-card {
   @apply flex flex-col items-center gap-4 p-6 rounded-xl transition-all hover:shadow-lg transform hover:-translate-y-1;
+}
+
+.contact-card-mobile {
+  @apply flex flex-col items-center gap-2 p-0 bg-transparent border-0;
+  flex: 0 1 auto;
+}
+
+.contact-card-mobile:hover {
+  @apply transform-none shadow-none;
+}
+
+.contact-card-icon-link {
+  @apply cursor-pointer inline-block;
 }
 
 .contact-card-linkedin {
@@ -68,8 +102,12 @@
   @apply font-bold text-gray-900 dark:text-white mb-2;
 }
 
+.contact-card-mobile .contact-card-title {
+  @apply mb-0;
+}
+
 .contact-card-subtitle {
-  @apply text-sm;
+  @apply text-sm md:block hidden;
 }
 
 .contact-card-subtitle-linkedin {

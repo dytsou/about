@@ -1,6 +1,6 @@
-import './About.css';
+import '../about/About.css';
 
-export function AboutContent() {
+export const AboutContent = () => {
   return (
     <div className="about-content">
       <div className="about-prose">
@@ -27,4 +27,4 @@ export function AboutContent() {
       </div>
     </div>
   );
-}
+};

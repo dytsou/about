@@ -1,4 +1,4 @@
-import './Hero.css';
+import '../hero/Hero.css';
 
 export function HeroIntro() {
   return (
@@ -18,4 +18,4 @@ export function HeroIntro() {
       </p>
     </div>
   );
-}
+};
