@@ -86,6 +86,7 @@ jobs:
           clean: true
           clean-exclude: |
             404.html
+            .nojekyll
             error.html
             no-ref-page.html
             README.md
