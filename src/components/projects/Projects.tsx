@@ -18,7 +18,7 @@ export function Projects() {
     <Section id="projects">
       <SectionHeader
         title="Featured Projects"
-        subtitle="A collection of projects showcasing my skills in backend development, full-stack applications, and game development"
+        subtitle="A collection of my projects"
       />
 
       {allProjects.length > 0 && (
