@@ -8,7 +8,7 @@ export interface NavLink {
 
 export const navLinks: NavLink[] = [
   { path: '/about', label: 'About' },
-  { path: '/experience', label: 'Experiences' },
+  { path: '/experiences', label: 'Experiences' },
   { path: '/projects', label: 'Projects' },
   { path: '/contact', label: 'Contact' },
   { path: 'https://dy.tsou.me/resume', label: 'Resume', external: true }

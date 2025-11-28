@@ -30,7 +30,7 @@ export const FOOTER_SECTIONS: FooterSection = {
     title: 'Quick Links',
     links: [
       { href: '/about', label: 'About', internal: true },
-      { href: '/experience', label: 'Experience', internal: true },
+      { href: '/experiences', label: 'Experiences', internal: true },
       { href: '/projects', label: 'Projects', internal: true },
       { href: '/contact', label: 'Contact', internal: true },
       { href: 'https://dy.tsou.me/resume', label: 'Resume', external: true },
