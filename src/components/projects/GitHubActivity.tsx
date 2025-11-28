@@ -16,7 +16,7 @@ function RepoCard({ repo }: RepoCardProps) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [shouldShowToggle, setShouldShowToggle] = useState(false);
   const descriptionRef = useRef<HTMLParagraphElement | null>(null);
-  const description = repo.description || 'No description available';
+  const description = repo.description || '';
 
   useEffect(() => {
     const measureOverflow = () => {
