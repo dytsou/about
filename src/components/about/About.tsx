@@ -2,7 +2,7 @@ import { useGitHub } from '../../hooks/useGitHub';
 import { Section } from '../layout/Section';
 import { SectionHeader } from '../layout/SectionHeader';
 import { ProfileImage } from './ProfileImage';
-import { AboutContent } from './AboutContent';
+import { AboutContent } from '../contents/About';
 import { StatsCards } from './StatsCards';
 import { LanguageGrid } from './LanguageGrid';
 
