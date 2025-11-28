@@ -8,7 +8,7 @@
 }
 
 .about-prose {
-  @apply max-w-none;
+  @apply max-w-none space-y-3;
 }
 
 .about-text {
