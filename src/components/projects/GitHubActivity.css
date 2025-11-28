@@ -1,7 +1,5 @@
 @reference "tailwindcss";
 
-/* Projects Component Styles */
-
 /* GitHub Activity Section */
 .github-activity {
   @apply mt-20;
@@ -69,3 +67,5 @@
 .github-button-icon {
   @apply w-5 h-5;
 }
+
+
