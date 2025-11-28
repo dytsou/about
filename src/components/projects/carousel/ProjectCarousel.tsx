@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
-import { ProjectCard } from './ProjectCard';
-import { getProjectIconAndColors } from './ProjectIconUtils';
+import { ProjectCard } from '../project-card/ProjectCard';
+import { getProjectIconAndColors } from '../ProjectIconUtils';
 import { CarouselControls } from './CarouselControls';
 import './ProjectCarousel.css';
 

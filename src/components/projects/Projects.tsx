@@ -1,6 +1,6 @@
 import { useGitHub } from '../../hooks/useGitHub';
-import { ProjectCarousel } from './ProjectCarousel';
-import { GitHubActivity } from './GitHubActivity';
+import { ProjectCarousel } from './carousel/ProjectCarousel';
+import { GitHubActivity } from './github-activity/GitHubActivity';
 import { PROJECTS_CONTENTS } from '../contents/Projects';
 import { Section } from '../layout/Section';
 import { SectionHeader } from '../layout/SectionHeader';

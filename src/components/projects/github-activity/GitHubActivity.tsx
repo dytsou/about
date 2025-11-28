@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { GitHubRepo } from '../../types';
+import { GitHubRepo } from '../../../types';
 import './GitHubActivity.css';
-import { RepoCard } from './RepoCard';
+import { RepoCard } from '../repo-card/RepoCard';
 import { GitHubActivityHeader } from './GitHubActivityHeader';
 import { GitHubViewMoreButton } from './GitHubViewMoreButton';
 import { GitHubReposToggle } from './GitHubReposToggle';

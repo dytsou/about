@@ -1,4 +1,4 @@
-import { TechTag } from '../ui/TechTag';
+import { TechTag } from '../../ui/TechTag';
 
 interface ProjectTechnologiesProps {
   technologies: string[];
