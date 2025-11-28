@@ -31,23 +31,23 @@ export function SocialLinksComponent({ isMobile = false }: SocialLinksComponentP
         )}
       </h4>
       {isContentVisible && (
-        <div className="footer-social-container">
-          {FOOTER_SECTIONS.connect.socialLinks.map((social, index) => {
-            const Icon = social.icon;
-            return (
-              <a
-                key={index}
-                href={social.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="footer-social-link"
-                aria-label={social.label}
-              >
-                <Icon className="footer-social-icon" />
-              </a>
-            );
-          })}
-        </div>
+      <div className="footer-social-container">
+        {FOOTER_SECTIONS.connect.socialLinks.map((social, index) => {
+          const Icon = social.icon;
+          return (
+            <a
+              key={index}
+              href={social.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="footer-social-link"
+              aria-label={social.label}
+            >
+              <Icon className="footer-social-icon" />
+            </a>
+          );
+        })}
+      </div>
       )}
     </div>
   );

@@ -32,13 +32,13 @@ export function QuickLinksComponent({ isMobile = false }: QuickLinksComponentPro
         )}
       </h4>
       {isContentVisible && (
-        <ul className="footer-links">
-          {FOOTER_SECTIONS.quickLinks.links.map((link, index) => (
-            <li key={index}>
-              <FooterLinkComponent link={link} />
-            </li>
-          ))}
-        </ul>
+      <ul className="footer-links">
+        {FOOTER_SECTIONS.quickLinks.links.map((link, index) => (
+          <li key={index}>
+            <FooterLinkComponent link={link} />
+          </li>
+        ))}
+      </ul>
       )}
     </div>
   );
