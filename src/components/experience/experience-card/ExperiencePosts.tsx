@@ -1,5 +1,5 @@
 import { ExperiencePostItem } from './ExperiencePostItem';
-import { Post } from './types';
+import { Post } from '../types';
 
 interface ExperiencePostsProps {
   posts: Post[];

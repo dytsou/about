@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
-import './Experience.css';
+import '../Experience.css';
 import { ExperienceCardDot } from './ExperienceCardDot';
 import { ExperienceOrganization } from './ExperienceOrganization';
 import { ExperienceMeta } from './ExperienceMeta';
 import { ExperienceDescription } from './ExperienceDescription';
 import { ExperiencePosts } from './ExperiencePosts';
 import { ExperienceCardToggle } from './ExperienceCardToggle';
-import { Experience } from './types';
+import { Experience } from '../types';
 
 interface ExperienceCardProps {
   experience: Experience;

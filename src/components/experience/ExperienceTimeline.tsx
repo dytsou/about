@@ -1,4 +1,4 @@
-import { ExperienceCard } from './ExperienceCard';
+import { ExperienceCard } from './experience-card/ExperienceCard';
 import './Experience.css';
 import { Experience } from './types';
 

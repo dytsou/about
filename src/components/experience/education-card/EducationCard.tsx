@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import './Experience.css';
+import '../Experience.css';
 import { EducationIcon } from './EducationIcon';
 import { EducationInstitution } from './EducationInstitution';
 import { EducationMeta } from './EducationMeta';
