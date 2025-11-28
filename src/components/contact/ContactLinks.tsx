@@ -12,7 +12,7 @@ export const CONTACT_CARDS: ContactCard[] = [
   {
     platform: 'linkedin' as const,
     title: 'LinkedIn',
-    subtitle: 'https://www.linkedin.com/in/dytsou/',
+    subtitle: 'linkedin.com/in/dytsou/',
     url: 'https://www.linkedin.com/in/dytsou/',
     icon: Linkedin
   },
