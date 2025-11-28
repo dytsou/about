@@ -4,7 +4,7 @@ import { SectionHeader } from '../layout/SectionHeader';
 import { ProfileImage } from './ProfileImage';
 import { AboutContent } from '../contents/About';
 import { StatsCards } from './StatsCards';
-import { LanguageGrid } from './LanguageGrid';
+import { LanguageGrid } from './language-grid/LanguageGrid';
 
 export function About() {
   const { stats } = useGitHub();
