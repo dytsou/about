@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState, ComponentType } from 'react';
-import { Github, ExternalLink } from 'lucide-react';
-import { TechTag } from '../ui/TechTag';
 import './ProjectCard.css';
+import { ProjectCardHeader } from './ProjectCardHeader';
+import { ProjectDescription } from './ProjectDescription';
+import { ProjectTechnologies } from './ProjectTechnologies';
+import { ProjectActions } from './ProjectActions';
 
 interface Project {
   id: string;
@@ -86,79 +88,32 @@ export function ProjectCard({
     };
   }, [project.description, projectIndex, expandedDescriptions]);
 
+  const isDescriptionExpanded = expandedDescriptions.has(projectIndex);
+  const isTagsExpanded = expandedTags.has(projectIndex);
+
   return (
     <div className={`project-card ${isMobile ? 'project-card-mobile' : ''} ${cardStyle}`}>
       <div className="project-card-content">
         <div className="project-card-main">
           <div>
-            <h3 className="project-title">
-              <span className="project-title-content">
-                <Icon className={`project-icon ${iconClass}`} />
-                <span>{project.title}</span>
-              </span>
-            </h3>
-            <div className="project-description-container">
-              <p ref={descriptionRef} className={`project-description ${expandedDescriptions.has(projectIndex) ? '' : 'project-description-collapsed'}`}>
-                {project.description}
-              </p>
-              {shouldShowToggle && (
-                <button
-                  onClick={() => toggleDescription(projectIndex)}
-                  className="project-description-toggle"
-                >
-                  {expandedDescriptions.has(projectIndex) ? 'See less' : 'See more'}
-                </button>
-              )}
-            </div>
+            <ProjectCardHeader Icon={Icon} iconClass={iconClass} title={project.title} />
+            <ProjectDescription
+              description={project.description}
+              descriptionRef={descriptionRef}
+              isExpanded={isDescriptionExpanded}
+              shouldShowToggle={shouldShowToggle}
+              onToggle={() => toggleDescription(projectIndex)}
+            />
           </div>
 
-          <div className="project-technologies">
-            {project.technologies.slice(0, expandedTags.has(projectIndex) ? project.technologies.length : 5).map((tech: string, index: number) => (
-              <TechTag key={index} technology={tech} />
-            ))}
-            {project.technologies.length > 5 && !expandedTags.has(projectIndex) && (
-              <button
-                onClick={() => toggleTags(projectIndex)}
-                className="project-tech-more-button"
-              >
-                +{project.technologies.length - 5} more
-              </button>
-            )}
-            {expandedTags.has(projectIndex) && project.technologies.length > 5 && (
-              <button
-                onClick={() => toggleTags(projectIndex)}
-                className="project-tech-less-button"
-              >
-                Show less
-              </button>
-            )}
-          </div>
+          <ProjectTechnologies
+            technologies={project.technologies}
+            isExpanded={isTagsExpanded}
+            onToggle={() => toggleTags(projectIndex)}
+          />
         </div>
 
-        <div className="project-actions">
-          {project.github_url && (
-            <a
-              href={project.github_url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="project-action-button project-action-github"
-            >
-              <Github className="project-action-icon" />
-              Code
-            </a>
-          )}
-          {project.live_url && (
-            <a
-              href={project.live_url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="project-action-button project-action-demo"
-            >
-              <ExternalLink className="project-action-icon" />
-              Demo
-            </a>
-          )}
-        </div>
+        <ProjectActions githubUrl={project.github_url} liveUrl={project.live_url} />
       </div>
     </div>
   );

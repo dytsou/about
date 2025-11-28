@@ -1,6 +1,6 @@
 import { Section } from '../layout/Section';
 import { SectionHeader } from '../layout/SectionHeader';
-import { EducationCard } from './EducationCard';
+import { EducationCard } from './education-card/EducationCard';
 import { ExperienceTimeline } from './ExperienceTimeline';
 import { experiences, education } from '../contents/Experience';
 

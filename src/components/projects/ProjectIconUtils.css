@@ -1,0 +1,121 @@
+@reference "tailwindcss";
+
+/* Project Icon Color Classes */
+
+/* Core System / Dashboard */
+.project-icon-core-system {
+  @apply text-slate-700 dark:text-slate-300;
+}
+
+.project-icon-bg-core-system {
+  @apply from-slate-50 to-gray-100 dark:from-slate-800/40 dark:to-gray-800/40;
+}
+
+/* Calendar */
+.project-icon-calendar {
+  @apply text-cyan-600 dark:text-cyan-400;
+}
+
+.project-icon-bg-calendar {
+  @apply from-cyan-50 to-blue-50 dark:from-cyan-900/20 dark:to-blue-900/20;
+}
+
+/* Ballquest */
+.project-icon-ballquest {
+  @apply text-orange-600 dark:text-orange-400;
+}
+
+.project-icon-bg-ballquest {
+  @apply from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20;
+}
+
+/* Dungeon */
+.project-icon-dungeon {
+  @apply text-violet-600 dark:text-violet-400;
+}
+
+.project-icon-bg-dungeon {
+  @apply from-violet-50 to-purple-50 dark:from-violet-900/20 dark:to-purple-900/20;
+}
+
+/* Reversi */
+.project-icon-reversi {
+  @apply text-zinc-700 dark:text-zinc-300;
+}
+
+.project-icon-bg-reversi {
+  @apply from-zinc-50 to-slate-50 dark:from-zinc-800/40 dark:to-slate-800/40;
+}
+
+/* Backend / Go */
+.project-icon-backend {
+  @apply text-blue-600 dark:text-blue-400;
+}
+
+.project-icon-bg-backend {
+  @apply from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20;
+}
+
+/* Docker */
+.project-icon-docker {
+  @apply text-cyan-600 dark:text-cyan-400;
+}
+
+.project-icon-bg-docker {
+  @apply from-cyan-50 to-blue-50 dark:from-cyan-900/20 dark:to-blue-900/20;
+}
+
+/* Database / PostgreSQL */
+.project-icon-database {
+  @apply text-indigo-600 dark:text-indigo-400;
+}
+
+.project-icon-bg-database {
+  @apply from-indigo-50 to-blue-50 dark:from-indigo-900/20 dark:to-blue-900/20;
+}
+
+/* GraphQL */
+.project-icon-graphql {
+  @apply text-pink-600 dark:text-pink-400;
+}
+
+.project-icon-bg-graphql {
+  @apply from-pink-50 to-purple-50 dark:from-pink-900/20 dark:to-purple-900/20;
+}
+
+/* Flutter / Dart */
+.project-icon-flutter {
+  @apply text-sky-600 dark:text-sky-400;
+}
+
+.project-icon-bg-flutter {
+  @apply from-sky-50 to-cyan-50 dark:from-sky-900/20 dark:to-cyan-900/20;
+}
+
+/* Game / C++ */
+.project-icon-game {
+  @apply text-gray-700 dark:text-gray-300;
+}
+
+.project-icon-bg-game {
+  @apply from-gray-50 to-slate-50 dark:from-gray-800/40 dark:to-slate-800/40;
+}
+
+/* AI / LLM */
+.project-icon-ai {
+  @apply text-emerald-600 dark:text-emerald-400;
+}
+
+.project-icon-bg-ai {
+  @apply from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20;
+}
+
+/* Default Web App */
+.project-icon-default {
+  @apply text-blue-600 dark:text-blue-400;
+}
+
+.project-icon-bg-default {
+  @apply from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20;
+}
+
