@@ -13,6 +13,7 @@
   @apply grid md:grid-cols-3 gap-8 mb-8;
 }
 
+
 .footer-brand {
   @apply text-2xl font-bold mb-4 text-gray-900 dark:text-white;
 }
@@ -22,7 +23,19 @@
 }
 
 .footer-section-title {
-  @apply text-lg font-semibold mb-4 text-gray-900 dark:text-white;
+  @apply text-lg font-semibold mb-4 text-gray-900 dark:text-white flex items-center gap-2;
+}
+
+.footer-section-collapsed .footer-section-title {
+  @apply mb-2 md:mb-4;
+}
+
+.footer-section-toggle {
+  @apply inline-flex items-center justify-center text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors md:hidden;
+}
+
+.footer-section-toggle-icon {
+  @apply w-5 h-5;
 }
 
 .footer-links {
