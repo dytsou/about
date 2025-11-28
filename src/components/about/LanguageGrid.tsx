@@ -1,3 +1,5 @@
+import { useState, useEffect } from 'react';
+import { ChevronDown, ChevronUp } from 'lucide-react';
 import './About.css';
 
 const LANGUAGES: { name: string; color: string }[] = [
@@ -12,26 +14,57 @@ const LANGUAGES: { name: string; color: string }[] = [
 ];
 
 export function LanguageGrid() {
+  const [isMobile, setIsMobile] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  const shouldShowToggle = isMobile;
+  const isContentVisible = !isMobile || isExpanded;
+
   return (
-    <div className="language-grid-container">
+    <div className={`language-grid-container ${!isContentVisible ? 'language-grid-collapsed' : ''}`}>
       <div className="language-grid-card">
         <h5 className="language-grid-title">
           Most Used Languages
+          {shouldShowToggle && (
+            <button
+              onClick={() => setIsExpanded(!isExpanded)}
+              className="language-grid-toggle"
+              aria-label={isExpanded ? 'Collapse languages' : 'Expand languages'}
+            >
+              {isExpanded ? (
+                <ChevronUp className="language-grid-toggle-icon" />
+              ) : (
+                <ChevronDown className="language-grid-toggle-icon" />
+              )}
+            </button>
+          )}
         </h5>
-        <div className="language-grid-list">
-          {LANGUAGES.map((lang) => (
-            <div key={lang.name} className="language-item">
-              <div
-                className={`language-dot`}
-                style={{ backgroundColor: lang.color || '#9ca3af' }}
-              ></div>
-              <div className={`language-name ${lang.name.length > 10 ? 'language-name-xs' : 'language-name-sm'
-                }`}>
-                {lang.name}
+        {isContentVisible && (
+          <div className="language-grid-list">
+            {LANGUAGES.map((lang) => (
+              <div key={lang.name} className="language-item">
+                <div
+                  className={`language-dot`}
+                  style={{ backgroundColor: lang.color || '#9ca3af' }}
+                ></div>
+                <div className={`language-name ${lang.name.length > 10 ? 'language-name-xs' : 'language-name-sm'
+                  }`}>
+                  {lang.name}
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
