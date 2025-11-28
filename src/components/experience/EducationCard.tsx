@@ -1,6 +1,10 @@
 import { useState, useEffect } from 'react';
-import { GraduationCap, Calendar, MapPin } from 'lucide-react';
 import './Experience.css';
+import { EducationIcon } from './EducationIcon';
+import { EducationInstitution } from './EducationInstitution';
+import { EducationMeta } from './EducationMeta';
+import { EducationHighlights } from './EducationHighlights';
+import { EducationToggle } from './EducationToggle';
 
 interface Education {
   degree: string;
@@ -34,44 +38,23 @@ export function EducationCard({ education }: EducationCardProps) {
   return (
     <div className="education-card">
       <div className="education-card-content">
-        <div className="education-icon-container">
-          <GraduationCap className="education-icon" />
-        </div>
+        <EducationIcon />
         <div className="education-info">
-          <h3 className="education-institution">
-            {education.institution}
-          </h3>
-          <div className="education-degree">
-            {education.degree}
-          </div>
-          <div className="education-meta">
-            <div className="education-meta-item">
-              <Calendar className="education-meta-icon" />
-              {education.period}
-            </div>
-            <div className="education-meta-item">
-              <MapPin className="education-meta-icon" />
-              {education.location}
-            </div>
-          </div>
+          <EducationInstitution
+            institution={education.institution}
+            degree={education.degree}
+          />
+          <EducationMeta period={education.period} location={education.location} />
+          
           {isContentVisible && (
-            <ul className="education-highlights">
-              {education.highlights.map((highlight, index) => (
-                <li key={index} className="education-highlight-item">
-                  <span className="education-highlight-bullet">•</span>
-                  {highlight}
-                </li>
-              ))}
-            </ul>
+            <EducationHighlights highlights={education.highlights} />
           )}
+          
           {shouldShowToggle && (
-            <button
-              onClick={() => setIsExpanded(!isExpanded)}
-              className="education-highlights-toggle"
-              aria-label={isExpanded ? 'Collapse highlights' : 'Expand highlights'}
-            >
-              {isExpanded ? 'See less' : 'See more'}
-            </button>
+            <EducationToggle
+              isExpanded={isExpanded}
+              onToggle={() => setIsExpanded(!isExpanded)}
+            />
           )}
         </div>
       </div>
