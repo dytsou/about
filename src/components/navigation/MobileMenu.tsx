@@ -8,18 +8,20 @@ interface MobileMenuProps {
 }
 
 export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
-  if (!isOpen) return null;
-
   return (
-    <div className="nav-mobile-menu">
+    <div className={`nav-mobile-menu ${isOpen ? 'nav-mobile-menu-open' : 'nav-mobile-menu-closed'}`}>
       <div className="nav-mobile-content">
-        {navLinks.map(link => (
-          <NavLinkComponent
+        {navLinks.map((link) => (
+          <div
             key={link.path}
-            link={link}
-            variant="mobile"
-            onNavigate={onClose}
-          />
+            className={`nav-mobile-link-wrapper ${isOpen ? 'nav-mobile-link-visible' : 'nav-mobile-link-hidden'}`}
+          >
+            <NavLinkComponent
+              link={link}
+              variant="mobile"
+              onNavigate={onClose}
+            />
+          </div>
         ))}
       </div>
     </div>
