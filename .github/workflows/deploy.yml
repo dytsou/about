@@ -7,14 +7,19 @@ on:
       - completed
     branches: [main]
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "src/**"
+      - ".github/**"
 
 permissions:
   contents: write
 
 jobs:
   checks:
-    # Run checks for manual workflow_dispatch (CI already ran for workflow_run)
-    if: github.event_name == 'workflow_dispatch'
+    # Run checks for push and manual workflow_dispatch (CI already ran for workflow_run)
+    if: github.event_name != 'workflow_run'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source
@@ -45,13 +50,13 @@ jobs:
   deploy:
     # Only deploy if:
     # - CI workflow completed successfully (for workflow_run), OR
-    # - checks job completed successfully (for workflow_dispatch)
+    # - checks job completed successfully (for push and workflow_dispatch)
     needs: [checks]
     if: |
       always() &&
       (
         (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success') ||
-        (github.event_name == 'workflow_dispatch' && needs.checks.result == 'success')
+        (github.event_name != 'workflow_run' && needs.checks.result == 'success')
       )
     runs-on: ubuntu-latest
     steps:
