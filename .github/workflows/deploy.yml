@@ -12,6 +12,9 @@ on:
     paths:
       - "src/**"
       - ".github/**"
+      - "public/**"
+      - "package.json"
+      - "vite.config.ts"
 
 permissions:
   contents: write
